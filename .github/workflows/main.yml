@@ -28,5 +28,6 @@ jobs:
           echo "DOTENV_ME=$Dotenv" > .env.me
           yarn
           yarn dotenv-cli pull
+          rm -rf node_modules
           rsync -avz --delete * $Host:$Dir
           ssh $Host "cd $Dir && yarn && supervisorctl restart cms"
