@@ -26,6 +26,7 @@ jobs:
           Dotenv: ${{ secrets.DOTENV_ME }}
         run: |
           echo "DOTENV_ME=$Dotenv" > .env.me
+          yarn
           yarn dotenv-cli pull
           rsync -avz --delete * $Host:$Dir
           ssh $Host "cd $Dir && yarn && supervisorctl restart cms"
