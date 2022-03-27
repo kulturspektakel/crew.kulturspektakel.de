@@ -30,4 +30,4 @@ jobs:
           yarn dotenv-cli pull
           rm -rf node_modules
           rsync -avz --delete * $Host:$Dir
-          ssh $Host "cd $Dir && yarn && supervisorctl restart cms"
+          ssh $Host "cd $Dir && ./scripts/deploy.sh"
