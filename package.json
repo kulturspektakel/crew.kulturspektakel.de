@@ -10,12 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@mapbox/node-pre-gyp": "^1.0.8",
-    "argon2": "^0.28.5",
-    "directus": "^9.6.0",
-    "pg": "^8.7.3"
+    "directus": "^9.19.2",
+    "pg": "^8.8.0"
   },
   "devDependencies": {
-    "@dotenv/cli": "^2.2.1"
+    "@dotenv/cli": "^2.2.2",
+    "@mapbox/node-pre-gyp": "^1.0.10"
   }
 }
