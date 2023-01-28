@@ -27,7 +27,7 @@ jobs:
         run: |
           echo "DOTENV_ME=$Dotenv" > .env.me
           yarn
-          yarn dotenv-cli pull
+          yarn dotenv-vault pull
           rm -rf node_modules
           rsync -avz --delete * $Host:$Dir
           ssh $Host "cd $Dir && ./scripts/deploy.sh"
