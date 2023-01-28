@@ -25,9 +25,11 @@ jobs:
           Dir: /var/www/virtual/kultursp/cms.kulturspektakel.de
           Dotenv: ${{ secrets.DOTENV_ME }}
         run: |
-          echo "DOTENV_ME=$Dotenv" > .env.me
           yarn
           yarn dotenv-vault pull
+          yarn dotenv-vault pull production
+          yarn ts-node scripts/merge-envs.ts
+          rm -rf .env.me
           rm -rf node_modules
           rsync -avz --delete . $Host:$Dir
           ssh $Host "cd $Dir && ./scripts/deploy.sh"
