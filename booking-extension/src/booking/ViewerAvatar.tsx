@@ -1,6 +1,6 @@
-import { gql } from "@apollo/client";
-import { Avatar, AvatarProps } from "antd/es";
-import { AvatarFragment } from "./graphql";
+import {gql} from '@apollo/client';
+import {Avatar, AvatarProps} from 'antd/es';
+import {AvatarFragment} from './types/graphql';
 
 gql`
   fragment Avatar on Viewer {
@@ -17,9 +17,9 @@ export default function ViewerAvatar({
   return (
     <Avatar src={profilePicture} {...props}>
       {displayName
-        .split(" ")
+        .split(' ')
         .map((n) => n.substring(0, 1).toLocaleUpperCase())
-        .join("")}
+        .join('')}
     </Avatar>
   );
 }

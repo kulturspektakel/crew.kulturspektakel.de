@@ -1,7 +1,7 @@
-import { gql } from "@apollo/client";
-import { Wrapper } from "@googlemaps/react-wrapper";
-import { useRef, useEffect } from "react";
-import { GoogleMapsFragment } from "./graphql";
+import {gql} from '@apollo/client';
+import {Wrapper} from '@googlemaps/react-wrapper';
+import {useRef, useEffect} from 'react';
+import {GoogleMapsFragment} from './types/graphql';
 
 gql`
   fragment GoogleMaps on BandApplication {
@@ -12,13 +12,13 @@ gql`
 
 export default function GoogleMaps(props: GoogleMapsFragment) {
   return (
-    <Wrapper apiKey={""}>
+    <Wrapper apiKey={''}>
       <MapComponent {...props} />
     </Wrapper>
   );
 }
 
-function MapComponent({ latitude, longitude }: GoogleMapsFragment) {
+function MapComponent({latitude, longitude}: GoogleMapsFragment) {
   const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ function MapComponent({ latitude, longitude }: GoogleMapsFragment) {
     const map = new window.google.maps.Map(ref.current, {
       center: kult,
       zoom: 12,
-      gestureHandling: "cooperative",
+      gestureHandling: 'cooperative',
       streetViewControl: false,
       fullscreenControl: false,
       mapTypeControl: false,
@@ -46,7 +46,7 @@ function MapComponent({ latitude, longitude }: GoogleMapsFragment) {
     new google.maps.Marker({
       position: kult,
       icon: {
-        url: "/marker.png",
+        url: '/marker.png',
         size: new google.maps.Size(52, 74),
         origin: new google.maps.Point(0, 0),
         anchor: new google.maps.Point(13, 37),
@@ -59,5 +59,5 @@ function MapComponent({ latitude, longitude }: GoogleMapsFragment) {
     map.fitBounds(bounds);
   });
 
-  return <div ref={ref} style={{ height: "100%" }} />;
+  return <div ref={ref} style={{height: '100%'}} />;
 }

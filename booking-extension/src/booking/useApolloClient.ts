@@ -1,14 +1,14 @@
-import { useMemo } from "react";
+import {useMemo} from 'react';
 import {
   ApolloClient,
   ApolloLink,
   HttpLink,
   InMemoryCache,
-} from "@apollo/client";
-import { withScalars } from "apollo-link-scalars";
-import { buildClientSchema, IntrospectionQuery } from "graphql";
-import { GraphQLDate, GraphQLDateTime } from "graphql-scalars";
-import introspectionResult from "./graphql.schema.json";
+} from '@apollo/client';
+import {withScalars} from 'apollo-link-scalars';
+import {buildClientSchema, IntrospectionQuery} from 'graphql';
+import {GraphQLDate, GraphQLDateTime} from 'graphql-scalars';
+import introspectionResult from './types/graphql.schema.json';
 
 export default function useApolloClient() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -18,7 +18,7 @@ export default function useApolloClient() {
         link: ApolloLink.from([
           withScalars({
             schema: buildClientSchema(
-              introspectionResult as unknown as IntrospectionQuery
+              introspectionResult as unknown as IntrospectionQuery,
             ),
             typesMap: {
               DateTime: GraphQLDateTime,
@@ -26,14 +26,14 @@ export default function useApolloClient() {
             },
           }),
           new HttpLink({
-            uri: "https://api.kulturspektakel.de/graphql",
-            credentials: "include",
+            uri: 'https://api.kulturspektakel.de/graphql',
+            credentials: 'include',
             // headers: { cookie },
           }),
         ]),
         cache: new InMemoryCache(),
       }),
-    []
+    [],
   );
   return client;
 }

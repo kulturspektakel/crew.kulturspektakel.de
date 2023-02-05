@@ -1,17 +1,17 @@
-import { Tooltip, Typography } from "antd/es";
-import React, { useCallback } from "react";
-import { useState } from "react";
+import {Tooltip, Typography} from 'antd/es';
+import React, {useCallback} from 'react';
+import {useState} from 'react';
 
-type State = "default" | "clicked" | "copied";
+type State = 'default' | 'clicked' | 'copied';
 
 export default function Clipboard(props: {
   children: React.ReactNode;
   value?: string;
   onCopy?: () => void;
 }) {
-  const [state, setState] = useState<State>("default");
+  const [state, setState] = useState<State>('default');
   const onClick = useCallback(() => {
-    setState("clicked");
+    setState('clicked');
     navigator.clipboard.writeText(props.value ?? String(props.children));
     if (props.onCopy) {
       props.onCopy();
@@ -21,15 +21,15 @@ export default function Clipboard(props: {
   return (
     <Tooltip
       title={
-        state === "clicked"
-          ? "Kopiert"
-          : state === "default"
-          ? "In Zwischenablage kopieren"
+        state === 'clicked'
+          ? 'Kopiert'
+          : state === 'default'
+          ? 'In Zwischenablage kopieren'
           : null
       }
       afterOpenChange={(visible) => {
         if (!visible) {
-          setTimeout(() => setState("default"), 200);
+          setTimeout(() => setState('default'), 200);
         }
       }}
     >

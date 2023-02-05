@@ -5,6 +5,7 @@ import useApolloClient from './useApolloClient';
 import BookingTable from './BookingTable';
 import {ConfigProvider, theme} from 'antd/es';
 import deDE from 'antd/locale/de_DE';
+import {ViewerContextProvider} from './useViewerContext';
 
 export default function Booking() {
   const [selected, setSelected] = useState<string | null>(null);
@@ -12,20 +13,22 @@ export default function Booking() {
 
   return (
     <ApolloProvider client={client}>
-      <ConfigProvider
-        locale={deDE}
-        theme={{
-          token: {
-            fontSizeHeading5: theme.defaultConfig.token.fontSize,
-          },
-        }}
-      >
-        <BookingTable onSelect={setSelected} />
-        <BandApplicationDetails
-          bandApplicationId={selected}
-          onClose={() => setSelected(null)}
-        />
-      </ConfigProvider>
+      <ViewerContextProvider>
+        <ConfigProvider
+          locale={deDE}
+          theme={{
+            token: {
+              fontSizeHeading5: theme.defaultConfig.token.fontSize,
+            },
+          }}
+        >
+          <BookingTable onSelect={setSelected} />
+          <BandApplicationDetails
+            bandApplicationId={selected}
+            onClose={() => setSelected(null)}
+          />
+        </ConfigProvider>
+      </ViewerContextProvider>
     </ApolloProvider>
   );
 }

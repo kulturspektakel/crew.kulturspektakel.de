@@ -1,27 +1,13 @@
 import {Avatar, Table, theme, Tooltip, Typography} from 'antd/es';
 import React, {useMemo} from 'react';
 import {gql} from '@apollo/client';
-import {
-  BandApplcationsQuery,
-  GenreCategory,
-  useBandApplcationsQuery,
-} from './graphql';
+import {BandApplcationsQuery, useBandApplcationsQuery} from './types/graphql';
 import Rater from './Rater';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import useViewerContext from './useViewerContext';
 import Rating from './Rating';
-import {CommentOutlined} from '@ant-design/icons/es';
-
-import iconPop from './assets/pop.svg';
-import iconRock from './assets/rock.svg';
-import iconIndie from './assets/indie.svg';
-import iconMetal from './assets/metal.svg';
-import iconCountry from './assets/country.svg';
-import iconHipHop from './assets/hip_hop.svg';
-import iconJazz from './assets/jazz.svg';
-import iconHippie from './assets/hippie.svg';
-import iconDisco from './assets/disco.svg';
-import iconVocal from './assets/vocal.svg';
+import {CommentOutlined} from '@ant-design/icons';
+import {GENRE_CATEGORIES, GENRE_ICONS} from './genre';
 
 gql`
   fragment Rating on BandApplication {
@@ -64,35 +50,6 @@ type RecordType = Extract<
   BandApplcationsQuery['node'],
   {__typename?: 'Event'}
 >['bandApplication'][number];
-
-export const GENRE_ICONS: Map<GenreCategory, string> = new Map([
-  [GenreCategory.Pop, iconPop],
-  [GenreCategory.Rock, iconRock],
-  [GenreCategory.Indie, iconIndie],
-  [GenreCategory.HardrockMetalPunk, iconMetal],
-  [GenreCategory.FolkSingerSongwriterCountry, iconCountry],
-  [GenreCategory.ElektroHipHop, iconHipHop],
-  [GenreCategory.BluesFunkJazzSoul, iconJazz],
-  [GenreCategory.ReggaeSka, iconHippie],
-  [GenreCategory.Dj, iconDisco],
-  [GenreCategory.Other, iconVocal],
-]);
-
-export const GENRE_CATEGORIES: Map<GenreCategory, string> = new Map([
-  [GenreCategory.Pop, 'Pop'],
-  [GenreCategory.Rock, 'Rock'],
-  [GenreCategory.Indie, 'Indie'],
-  [GenreCategory.HardrockMetalPunk, 'Hardrock / Metal / Punk'],
-  [
-    GenreCategory.FolkSingerSongwriterCountry,
-    'Folk / Singer/Songwriter / Country',
-  ],
-  [GenreCategory.ElektroHipHop, 'Elektro / Hip-Hop'],
-  [GenreCategory.BluesFunkJazzSoul, 'Blues / Funk / Jazz / Soul'],
-  [GenreCategory.ReggaeSka, 'Reggae / Ska'],
-  [GenreCategory.Dj, 'DJ'],
-  [GenreCategory.Other, 'andere Musikrichtung'],
-]);
 
 gql`
   fragment Rating on BandApplication {
@@ -140,13 +97,22 @@ export default function BookingTable(props: {onSelect: (id: string) => void}) {
 
   return (
     <div style={{height: '100vh'}}>
-      <MemoizedTable
-        loading={loading}
-        dataSource={
-          data?.node?.__typename === 'Event' ? data.node.bandApplication : []
-        }
-        setSelected={props.onSelect}
-      />
+      <AutoSizer>
+        {({width, height}) => (
+          <div style={{height, width}}>
+            <MemoizedTable
+              loading={loading}
+              height={height - 40}
+              dataSource={
+                data?.node?.__typename === 'Event'
+                  ? data.node.bandApplication
+                  : []
+              }
+              setSelected={props.onSelect}
+            />
+          </div>
+        )}
+      </AutoSizer>
     </div>
   );
 }
@@ -156,10 +122,12 @@ const MemoizedTable = React.memo(
     setSelected,
     loading,
     dataSource,
+    height,
   }: {
     dataSource: RecordType[];
     loading: boolean;
     setSelected: (id: string) => void;
+    height: number;
   }) => {
     const viewer = useViewerContext();
     const {token} = theme.useToken();
@@ -182,7 +150,7 @@ const MemoizedTable = React.memo(
               (e.target as any).tagName.toLowerCase(),
             ) && setSelected(r.id),
         })}
-        scroll={{x: 0, y: '100vh'}}
+        scroll={{y: height, x: 500}}
         size="small"
         columns={[
           {

@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import {gql} from '@apollo/client';
 import {
   Checkbox,
   Col,
@@ -9,24 +9,24 @@ import {
   Statistic,
   theme,
   Typography,
-} from "antd/es";
-import { useCallback, useEffect, useRef } from "react";
+} from 'antd/es';
+import {useCallback, useEffect, useRef} from 'react';
 import {
   useApplicationDetailsQuery,
   ApplicationDetailsQuery,
   useMarkAsContextedMutation,
   PreviouslyPlayed,
-} from "./graphql";
-import useViewerContext from "./useViewerContext";
-import Demo from "./Demo";
-import Rater from "./Rater";
-import Rating from "./Rating";
-import { GlobalOutlined } from "@ant-design/icons";
-import styles from "./BandApplicationDetails.module.css";
-import BandApplicationTimeline from "./BandApplicationTimeline";
-import Clipboard from "./Clipboard";
-import { GENRE_CATEGORIES, GENRE_ICONS } from "./BookingTable";
-import GoogleMaps from "./GoogleMaps";
+} from './types/graphql';
+import useViewerContext from './useViewerContext';
+import Demo from './Demo';
+import Rater from './Rater';
+import Rating from './Rating';
+import {GlobalOutlined} from '@ant-design/icons';
+import styles from './BandApplicationDetails.module.css';
+import BandApplicationTimeline from './BandApplicationTimeline';
+import Clipboard from './Clipboard';
+import {GENRE_CATEGORIES, GENRE_ICONS} from './genre';
+import GoogleMaps from './GoogleMaps';
 
 gql`
   query ApplicationDetails($id: ID!) {
@@ -93,7 +93,7 @@ export default function BandApplicationDetails({
   const previousId = useRef(bandApplicationId);
   // using previous ID, during leave animation
   const id = bandApplicationId ?? previousId?.current;
-  const { data } = useApplicationDetailsQuery({
+  const {data} = useApplicationDetailsQuery({
     variables: {
       id: id!,
     },
@@ -112,12 +112,12 @@ export default function BandApplicationDetails({
         <Skeleton
           paragraph={false}
           className={styles.skeletonTitle}
-          loading={data?.node?.__typename !== "BandApplication"}
+          loading={data?.node?.__typename !== 'BandApplication'}
         >
-          {data?.node?.__typename === "BandApplication" && (
+          {data?.node?.__typename === 'BandApplication' && (
             <div className={styles.titleGroup}>
               <img
-                src={`/genre/${GENRE_ICONS.get(data?.node?.genreCategory)}`}
+                src={GENRE_ICONS.get(data?.node?.genreCategory)}
                 width="32px"
                 height="32px"
                 alt="Genre"
@@ -146,7 +146,7 @@ export default function BandApplicationDetails({
       open={Boolean(bandApplicationId)}
     >
       <Row gutter={24}>
-        {data?.node?.__typename === "BandApplication" ? (
+        {data?.node?.__typename === 'BandApplication' ? (
           <DrawerContent {...data?.node} />
         ) : (
           <>
@@ -168,14 +168,14 @@ export default function BandApplicationDetails({
 }
 
 type Props = Extract<
-  ApplicationDetailsQuery["node"],
-  { __typename?: "BandApplication" }
+  ApplicationDetailsQuery['node'],
+  {__typename?: 'BandApplication'}
 >;
 
 function DrawerContent(props: Props) {
   const viewer = useViewerContext();
   const [contacted] = useMarkAsContextedMutation();
-  const { token } = theme.useToken();
+  const {token} = theme.useToken();
 
   const onContact = useCallback(
     (c: boolean) =>
@@ -186,13 +186,13 @@ function DrawerContent(props: Props) {
         },
         optimisticResponse: () => ({
           markBandApplicationContacted: {
-            __typename: "BandApplication",
+            __typename: 'BandApplication',
             id: props.id,
             contactedByViewer: c ? viewer : null,
           },
         }),
       }),
-    [contacted, props.id, viewer]
+    [contacted, props.id, viewer],
   );
 
   return (
@@ -223,7 +223,7 @@ function DrawerContent(props: Props) {
                   (props.numberOfArtists! - props.numberOfNonMaleArtists!) /
                   props.numberOfArtists!
                 ).toLocaleString(undefined, {
-                  style: "percent",
+                  style: 'percent',
                   maximumFractionDigits: 1,
                 })}
                 &nbsp;männlich)
@@ -236,7 +236,7 @@ function DrawerContent(props: Props) {
               Woher kennt ihr das Kult?
             </Typography.Title>
             <Typography.Paragraph
-              ellipsis={{ rows: 5, expandable: true, symbol: "mehr" }}
+              ellipsis={{rows: 5, expandable: true, symbol: 'mehr'}}
             >
               {props.knowsKultFrom}
             </Typography.Paragraph>
@@ -246,7 +246,7 @@ function DrawerContent(props: Props) {
           <>
             <Typography.Title level={5}>Bandbeschreibung</Typography.Title>
             <Typography.Paragraph
-              ellipsis={{ rows: 5, expandable: true, symbol: "mehr" }}
+              ellipsis={{rows: 5, expandable: true, symbol: 'mehr'}}
             >
               {props.description}
             </Typography.Paragraph>
@@ -295,8 +295,8 @@ function DrawerContent(props: Props) {
               <Col span={8}>
                 <a href={props.website} target="_blank" rel="noreferrer">
                   <Statistic
-                    valueStyle={{ color: token.colorPrimary }}
-                    value={" "}
+                    valueStyle={{color: token.colorPrimary}}
+                    value={' '}
                     prefix={<GlobalOutlined color="blue" />}
                     title="Webseite"
                   />
@@ -307,8 +307,8 @@ function DrawerContent(props: Props) {
               <Col span={8}>
                 <a href={props.facebook} target="_blank" rel="noreferrer">
                   <Statistic
-                    valueStyle={{ color: token.colorPrimary }}
-                    value={props.facebookLikes ?? "?"}
+                    valueStyle={{color: token.colorPrimary}}
+                    value={props.facebookLikes ?? '?'}
                     title="Facebook"
                   />
                 </a>
@@ -322,8 +322,8 @@ function DrawerContent(props: Props) {
                   rel="noreferrer"
                 >
                   <Statistic
-                    valueStyle={{ color: token.colorPrimary }}
-                    value={props.instagramFollower ?? "?"}
+                    valueStyle={{color: token.colorPrimary}}
+                    value={props.instagramFollower ?? '?'}
                     title="Instagram"
                   />
                 </a>
@@ -341,7 +341,7 @@ function DrawerContent(props: Props) {
               bandApplicationId={props.id}
               value={
                 props.bandApplicationRating.find(
-                  ({ viewer: { id } }) => id === viewer?.id
+                  ({viewer: {id}}) => id === viewer?.id,
                 )?.rating
               }
             />
@@ -370,10 +370,10 @@ function DrawerContent(props: Props) {
 function PreviouslyPlayedText(text: PreviouslyPlayed): string {
   switch (text) {
     case PreviouslyPlayed.Yes:
-      return "Ja";
+      return 'Ja';
     case PreviouslyPlayed.OtherFormation:
-      return "In einer anderen Band";
+      return 'In einer anderen Band';
     case PreviouslyPlayed.No:
-      return "Nein";
+      return 'Nein';
   }
 }

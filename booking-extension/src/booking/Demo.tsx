@@ -1,7 +1,7 @@
-import { LinkOutlined } from "@ant-design/icons";
-import { gql } from "@apollo/client";
-import { Typography } from "antd";
-import { DemoEmbedType, DemoFragment } from "./graphql";
+import {LinkOutlined} from '@ant-design/icons';
+import {gql} from '@apollo/client';
+import {Typography} from 'antd';
+import {DemoEmbedType, DemoFragment} from './types/graphql';
 
 gql`
   fragment Demo on BandApplication {
@@ -11,19 +11,19 @@ gql`
   }
 `;
 
-export default function Demo({ demo, demoEmbed, demoEmbedType }: DemoFragment) {
+export default function Demo({demo, demoEmbed, demoEmbedType}: DemoFragment) {
   let embed: string | undefined;
-  let height: string | number = "auto";
+  let height: string | number = 'auto';
   let borderRadius: number | undefined = undefined;
 
   switch (demoEmbedType) {
     case DemoEmbedType.YouTubeVideo:
-      height = "auto";
+      height = 'auto';
       borderRadius = 8;
       embed = `https://www.youtube.com/embed/${demoEmbed}?autoplay=0&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0`;
       break;
     case DemoEmbedType.YouTubePlaylist:
-      height = "auto";
+      height = 'auto';
       borderRadius = 8;
       embed = `https://www.youtube.com/embed/videoseries?list=${demoEmbed}`;
       break;
@@ -47,7 +47,7 @@ export default function Demo({ demo, demoEmbed, demoEmbedType }: DemoFragment) {
       break;
     case DemoEmbedType.SoundcloudUrl:
       embed = `https://w.soundcloud.com/player/?url=${encodeURIComponent(
-        demoEmbed ?? ""
+        demoEmbed ?? '',
       )}&auto_play=false`;
       break;
   }
@@ -62,7 +62,7 @@ export default function Demo({ demo, demoEmbed, demoEmbedType }: DemoFragment) {
           frameBorder="0"
           style={{
             borderRadius,
-            aspectRatio: height === "auto" ? "16 / 9" : undefined,
+            aspectRatio: height === 'auto' ? '16 / 9' : undefined,
           }}
         />
       )}
@@ -70,10 +70,10 @@ export default function Demo({ demo, demoEmbed, demoEmbedType }: DemoFragment) {
       {demo && (
         <a
           style={{
-            whiteSpace: "nowrap",
-            textOverflow: "ellipsis",
-            overflow: "hidden",
-            display: "block",
+            whiteSpace: 'nowrap',
+            textOverflow: 'ellipsis',
+            overflow: 'hidden',
+            display: 'block',
           }}
           href={demo}
           target="_blank"

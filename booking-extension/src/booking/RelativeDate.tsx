@@ -1,16 +1,16 @@
-import { Tooltip } from "antd/es";
-import { useEffect, useMemo, useState } from "react";
+import {Tooltip} from 'antd/es';
+import {useEffect, useMemo, useState} from 'react';
 import {
   differenceInHours,
   differenceInMinutes,
   differenceInCalendarDays,
-} from "date-fns";
+} from 'date-fns';
 
 function relativeDate(date: Date) {
   const now = new Date();
   const mins = differenceInMinutes(now, date);
   if (mins < 2) {
-    return "gerade eben";
+    return 'gerade eben';
   } else if (mins < 91) {
     return `vor ${mins} Minuten`;
   }
@@ -37,19 +37,19 @@ function useRelativeDate(date: Date) {
   return res;
 }
 
-export default function RelativeDate(props: { date: Date }) {
+export default function RelativeDate(props: {date: Date}) {
   const d = useRelativeDate(props.date);
   const full = useMemo(
     () =>
-      props.date.toLocaleString("de-DE", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        timeZone: "Europe/Berlin",
+      props.date.toLocaleString('de-DE', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZone: 'Europe/Berlin',
       }),
-    [props.date]
+    [props.date],
   );
 
   if (d) {

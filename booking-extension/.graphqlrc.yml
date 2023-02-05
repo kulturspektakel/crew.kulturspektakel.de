@@ -1,15 +1,14 @@
 schema: https://api.kulturspektakel.de/graphql
 documents:
-  - ./pages/**/*.tsx
-  - ./components/**/*.tsx
-  - ./utils/**/*.ts
+  - ./src/booking/**/*.ts
+  - ./src/booking/**/*.tsx
 generates:
-  ./types/graphql.ts:
+  ./src/booking/types/graphql.ts:
     plugins:
       - typescript
       - typescript-operations
       - typescript-react-apollo
-  ./types/graphql.schema.json:
+  ./src/booking/types/graphql.schema.json:
     plugins:
       - introspection
     config:

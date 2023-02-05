@@ -891,182 +891,6 @@ export type CommentsFragment = {
   };
 };
 
-export type DemoFragment = {
-  __typename?: 'BandApplication';
-  demo?: string | null;
-  demoEmbed?: string | null;
-  demoEmbedType?: DemoEmbedType | null;
-};
-
-export type GoogleMapsFragment = {
-  __typename?: 'BandApplication';
-  latitude?: number | null;
-  longitude?: number | null;
-};
-
-export type BandApplicationRatingMutationVariables = Exact<{
-  id: Scalars['ID'];
-  rating?: InputMaybe<Scalars['Int']>;
-}>;
-
-export type BandApplicationRatingMutation = {
-  __typename?: 'Mutation';
-  rateBandApplication: {
-    __typename?: 'BandApplication';
-    id: string;
-    rating?: number | null;
-    bandApplicationRating: Array<{
-      __typename?: 'BandApplicationRating';
-      rating: number;
-      viewer: {
-        __typename?: 'Viewer';
-        id: string;
-        displayName: string;
-        profilePicture?: string | null;
-      };
-    }>;
-  };
-};
-
-export type DeviceTransactionsQueryVariables = Exact<{
-  deviceID: Scalars['ID'];
-}>;
-
-export type DeviceTransactionsQuery = {
-  __typename?: 'Query';
-  node?:
-    | {__typename?: 'Area'}
-    | {__typename?: 'BandApplication'}
-    | {__typename?: 'BandApplicationComment'}
-    | {__typename?: 'BandPlaying'}
-    | {__typename?: 'Card'}
-    | {
-        __typename?: 'Device';
-        transactions: {
-          __typename?: 'CardTransactionConnection';
-          data: Array<{
-            __typename?: 'CardTransaction';
-            deviceTime: Date;
-            balanceAfter: number;
-            balanceBefore: number;
-            depositBefore: number;
-            depositAfter: number;
-            cardId: string;
-            transactionType: CardTransactionType;
-            clientId: string;
-          }>;
-        };
-      }
-    | {__typename?: 'Event'}
-    | {__typename?: 'NuclinoPage'}
-    | {__typename?: 'Product'}
-    | {__typename?: 'ProductList'}
-    | {__typename?: 'Viewer'}
-    | null;
-};
-
-export type ProductListFragment = {
-  __typename?: 'ProductList';
-  id: string;
-  name: string;
-  emoji?: string | null;
-  active: boolean;
-  product: Array<{
-    __typename?: 'Product';
-    id: string;
-    name: string;
-    price: number;
-    requiresDeposit: boolean;
-  }>;
-};
-
-export type UpsertProductListMutationVariables = Exact<{
-  id?: InputMaybe<Scalars['ID']>;
-  emoji?: InputMaybe<Scalars['String']>;
-  name?: InputMaybe<Scalars['String']>;
-  products?: InputMaybe<Array<ProductInput> | ProductInput>;
-  active?: InputMaybe<Scalars['Boolean']>;
-}>;
-
-export type UpsertProductListMutation = {
-  __typename?: 'Mutation';
-  upsertProductList: {
-    __typename?: 'ProductList';
-    id: string;
-    name: string;
-    emoji?: string | null;
-    active: boolean;
-    product: Array<{
-      __typename?: 'Product';
-      id: string;
-      name: string;
-      price: number;
-      requiresDeposit: boolean;
-    }>;
-  };
-};
-
-export type ProductRowFragment = {
-  __typename?: 'Product';
-  id: string;
-  name: string;
-  price: number;
-  requiresDeposit: boolean;
-};
-
-export type RevenueDetailsQueryVariables = Exact<{
-  id: Scalars['ID'];
-  after: Scalars['DateTime'];
-  before: Scalars['DateTime'];
-  grouping: TimeGrouping;
-}>;
-
-export type RevenueDetailsQuery = {
-  __typename?: 'Query';
-  productList?:
-    | {__typename?: 'Area'}
-    | {__typename?: 'BandApplication'}
-    | {__typename?: 'BandApplicationComment'}
-    | {__typename?: 'BandPlaying'}
-    | {__typename?: 'Card'}
-    | {__typename?: 'Device'}
-    | {__typename?: 'Event'}
-    | {__typename?: 'NuclinoPage'}
-    | {__typename?: 'Product'}
-    | {
-        __typename?: 'ProductList';
-        id: string;
-        name: string;
-        salesNumbers: Array<{
-          __typename?: 'SalesNumber';
-          payment: OrderPayment;
-          timeSeries: Array<{
-            __typename?: 'TimeSeries';
-            time: Date;
-            value: number;
-          }>;
-        }>;
-        historicalProducts: Array<{
-          __typename?: 'HistoricalProduct';
-          name: string;
-          salesNumbers: Array<{
-            __typename?: 'SalesNumber';
-            count: number;
-            total: number;
-            payment: OrderPayment;
-          }>;
-        }>;
-      }
-    | {__typename?: 'Viewer'}
-    | null;
-};
-
-export type AvatarFragment = {
-  __typename?: 'Viewer';
-  displayName: string;
-  profilePicture?: string | null;
-};
-
 export type RatingFragment = {
   __typename?: 'BandApplication';
   rating?: number | null;
@@ -1135,218 +959,47 @@ export type BandApplcationsQuery = {
     | null;
 };
 
-export type EventsQueryVariables = Exact<{[key: string]: never}>;
-
-export type EventsQuery = {
-  __typename?: 'Query';
-  events: Array<{__typename?: 'Event'; id: string; name: string}>;
+export type DemoFragment = {
+  __typename?: 'BandApplication';
+  demo?: string | null;
+  demoEmbed?: string | null;
+  demoEmbedType?: DemoEmbedType | null;
 };
 
-export type CardInfoQueryVariables = Exact<{
-  cardID: Scalars['ID'];
+export type GoogleMapsFragment = {
+  __typename?: 'BandApplication';
+  latitude?: number | null;
+  longitude?: number | null;
+};
+
+export type BandApplicationRatingMutationVariables = Exact<{
+  id: Scalars['ID'];
+  rating?: InputMaybe<Scalars['Int']>;
 }>;
 
-export type CardInfoQuery = {
-  __typename?: 'Query';
-  config: {__typename?: 'Config'; depositValue: number};
-  node?:
-    | {__typename?: 'Area'}
-    | {__typename?: 'BandApplication'}
-    | {__typename?: 'BandApplicationComment'}
-    | {__typename?: 'BandPlaying'}
-    | {
-        __typename?: 'Card';
+export type BandApplicationRatingMutation = {
+  __typename?: 'Mutation';
+  rateBandApplication: {
+    __typename?: 'BandApplication';
+    id: string;
+    rating?: number | null;
+    bandApplicationRating: Array<{
+      __typename?: 'BandApplicationRating';
+      rating: number;
+      viewer: {
+        __typename?: 'Viewer';
         id: string;
-        transactions: {
-          __typename?: 'CardTransactionConnection';
-          balanceTotal: number;
-          data: Array<{
-            __typename?: 'CardTransaction';
-            clientId: string;
-            transactionType: CardTransactionType;
-            balanceAfter: number;
-            balanceBefore: number;
-            depositAfter: number;
-            depositBefore: number;
-            deviceTime: Date;
-            Order: Array<{
-              __typename?: 'Order';
-              total: number;
-              items: Array<{
-                __typename?: 'OrderItem';
-                amount: number;
-                name: string;
-                productList?: {
-                  __typename?: 'ProductList';
-                  emoji?: string | null;
-                  name: string;
-                } | null;
-              }>;
-            }>;
-          }>;
-        };
-      }
-    | {__typename?: 'Device'}
-    | {__typename?: 'Event'}
-    | {__typename?: 'NuclinoPage'}
-    | {__typename?: 'Product'}
-    | {__typename?: 'ProductList'}
-    | {__typename?: 'Viewer'}
-    | null;
-};
-
-export type DevicesQueryVariables = Exact<{[key: string]: never}>;
-
-export type DevicesQuery = {
-  __typename?: 'Query';
-  devices: Array<{
-    __typename?: 'Device';
-    id: string;
-    lastSeen?: Date | null;
-    softwareVersion?: string | null;
-    productList?: {__typename?: 'ProductList'; id: string; name: string} | null;
-  }>;
-  productLists: Array<{
-    __typename?: 'ProductList';
-    id: string;
-    name: string;
-    active: boolean;
-  }>;
-};
-
-export type UpdateDeviceListMutationVariables = Exact<{
-  productListId: Scalars['ID'];
-  deviceId: Scalars['ID'];
-}>;
-
-export type UpdateDeviceListMutation = {
-  __typename?: 'Mutation';
-  updateDeviceProductList: {
-    __typename?: 'Device';
-    id: string;
-    productList?: {__typename?: 'ProductList'; id: string; name: string} | null;
-  };
-};
-
-export type ProductListQueryVariables = Exact<{[key: string]: never}>;
-
-export type ProductListQuery = {
-  __typename?: 'Query';
-  productLists: Array<{
-    __typename?: 'ProductList';
-    id: string;
-    name: string;
-    emoji?: string | null;
-    active: boolean;
-    product: Array<{
-      __typename?: 'Product';
-      id: string;
-      name: string;
-      price: number;
-      requiresDeposit: boolean;
-    }>;
-  }>;
-};
-
-export type CreateProductListMutationVariables = Exact<{
-  name: Scalars['String'];
-}>;
-
-export type CreateProductListMutation = {
-  __typename?: 'Mutation';
-  upsertProductList: {
-    __typename?: 'ProductList';
-    id: string;
-    name: string;
-    emoji?: string | null;
-    active: boolean;
-    product: Array<{
-      __typename?: 'Product';
-      id: string;
-      name: string;
-      price: number;
-      requiresDeposit: boolean;
+        displayName: string;
+        profilePicture?: string | null;
+      };
     }>;
   };
 };
 
-export type ProductPrintQueryVariables = Exact<{[key: string]: never}>;
-
-export type ProductPrintQuery = {
-  __typename?: 'Query';
-  productLists: Array<{
-    __typename?: 'ProductList';
-    id: string;
-    emoji?: string | null;
-    name: string;
-    active: boolean;
-    product: Array<{
-      __typename?: 'Product';
-      id: string;
-      name: string;
-      price: number;
-      requiresDeposit: boolean;
-    }>;
-  }>;
-  config: {__typename?: 'Config'; depositValue: number};
-};
-
-export type RevenueQueryVariables = Exact<{
-  after: Scalars['DateTime'];
-  before: Scalars['DateTime'];
-}>;
-
-export type RevenueQuery = {
-  __typename?: 'Query';
-  config: {__typename?: 'Config'; depositValue: number};
-  events: Array<{
-    __typename?: 'Event';
-    id: string;
-    name: string;
-    start: Date;
-    end: Date;
-  }>;
-  productLists: Array<{
-    __typename?: 'ProductList';
-    id: string;
-    name: string;
-    salesNumbers: Array<{
-      __typename?: 'SalesNumber';
-      count: number;
-      total: number;
-      payment: OrderPayment;
-    }>;
-  }>;
-  transactions: {
-    __typename?: 'Transactions';
-    topUps: {
-      __typename?: 'CardTransactionConnection';
-      balanceTotal: number;
-      totalCount: number;
-      depositIn: number;
-      depositOut: number;
-    };
-    cashouts: {
-      __typename?: 'CardTransactionConnection';
-      balanceTotal: number;
-      totalCount: number;
-      depositIn: number;
-      depositOut: number;
-    };
-    charges: {
-      __typename?: 'CardTransactionConnection';
-      balanceTotal: number;
-      totalCount: number;
-      depositIn: number;
-      depositOut: number;
-    };
-    transactions: {
-      __typename?: 'CardTransactionConnection';
-      depositIn: number;
-      depositOut: number;
-      uniqueCards: number;
-    };
-  };
+export type AvatarFragment = {
+  __typename?: 'Viewer';
+  displayName: string;
+  profilePicture?: string | null;
 };
 
 export type ViewerContextProviderQueryVariables = Exact<{[key: string]: never}>;
@@ -1426,40 +1079,6 @@ export const BandApplicationTimelineFragmentDoc = gql`
   }
   ${CommentsFragmentDoc}
 `;
-export const DemoFragmentDoc = gql`
-  fragment Demo on BandApplication {
-    demo
-    demoEmbed
-    demoEmbedType
-  }
-`;
-export const GoogleMapsFragmentDoc = gql`
-  fragment GoogleMaps on BandApplication {
-    latitude
-    longitude
-  }
-`;
-export const ProductRowFragmentDoc = gql`
-  fragment ProductRow on Product {
-    id
-    name
-    price
-    requiresDeposit
-  }
-`;
-export const ProductListFragmentDoc = gql`
-  fragment ProductList on ProductList {
-    id
-    name
-    emoji
-    active
-    product {
-      id
-      ...ProductRow
-    }
-  }
-  ${ProductRowFragmentDoc}
-`;
 export const RatingFragmentDoc = gql`
   fragment Rating on BandApplication {
     bandApplicationRating {
@@ -1471,6 +1090,19 @@ export const RatingFragmentDoc = gql`
       rating
     }
     rating
+  }
+`;
+export const DemoFragmentDoc = gql`
+  fragment Demo on BandApplication {
+    demo
+    demoEmbed
+    demoEmbedType
+  }
+`;
+export const GoogleMapsFragmentDoc = gql`
+  fragment GoogleMaps on BandApplication {
+    latitude
+    longitude
   }
 `;
 export const ApplicationDetailsDocument = gql`
@@ -1724,281 +1356,6 @@ export type BandApplicationCommentDeleteMutationOptions =
     BandApplicationCommentDeleteMutation,
     BandApplicationCommentDeleteMutationVariables
   >;
-export const BandApplicationRatingDocument = gql`
-  mutation BandApplicationRating($id: ID!, $rating: Int) {
-    rateBandApplication(bandApplicationId: $id, rating: $rating) {
-      id
-      ...Rating
-    }
-  }
-  ${RatingFragmentDoc}
-`;
-export type BandApplicationRatingMutationFn = Apollo.MutationFunction<
-  BandApplicationRatingMutation,
-  BandApplicationRatingMutationVariables
->;
-
-/**
- * __useBandApplicationRatingMutation__
- *
- * To run a mutation, you first call `useBandApplicationRatingMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useBandApplicationRatingMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [bandApplicationRatingMutation, { data, loading, error }] = useBandApplicationRatingMutation({
- *   variables: {
- *      id: // value for 'id'
- *      rating: // value for 'rating'
- *   },
- * });
- */
-export function useBandApplicationRatingMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    BandApplicationRatingMutation,
-    BandApplicationRatingMutationVariables
-  >,
-) {
-  const options = {...defaultOptions, ...baseOptions};
-  return Apollo.useMutation<
-    BandApplicationRatingMutation,
-    BandApplicationRatingMutationVariables
-  >(BandApplicationRatingDocument, options);
-}
-export type BandApplicationRatingMutationHookResult = ReturnType<
-  typeof useBandApplicationRatingMutation
->;
-export type BandApplicationRatingMutationResult =
-  Apollo.MutationResult<BandApplicationRatingMutation>;
-export type BandApplicationRatingMutationOptions = Apollo.BaseMutationOptions<
-  BandApplicationRatingMutation,
-  BandApplicationRatingMutationVariables
->;
-export const DeviceTransactionsDocument = gql`
-  query DeviceTransactions($deviceID: ID!) {
-    node(id: $deviceID) {
-      ... on Device {
-        transactions(limit: 25) {
-          data {
-            deviceTime
-            balanceAfter
-            balanceBefore
-            depositBefore
-            depositAfter
-            cardId
-            transactionType
-            clientId
-          }
-        }
-      }
-    }
-  }
-`;
-
-/**
- * __useDeviceTransactionsQuery__
- *
- * To run a query within a React component, call `useDeviceTransactionsQuery` and pass it any options that fit your needs.
- * When your component renders, `useDeviceTransactionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useDeviceTransactionsQuery({
- *   variables: {
- *      deviceID: // value for 'deviceID'
- *   },
- * });
- */
-export function useDeviceTransactionsQuery(
-  baseOptions: Apollo.QueryHookOptions<
-    DeviceTransactionsQuery,
-    DeviceTransactionsQueryVariables
-  >,
-) {
-  const options = {...defaultOptions, ...baseOptions};
-  return Apollo.useQuery<
-    DeviceTransactionsQuery,
-    DeviceTransactionsQueryVariables
-  >(DeviceTransactionsDocument, options);
-}
-export function useDeviceTransactionsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    DeviceTransactionsQuery,
-    DeviceTransactionsQueryVariables
-  >,
-) {
-  const options = {...defaultOptions, ...baseOptions};
-  return Apollo.useLazyQuery<
-    DeviceTransactionsQuery,
-    DeviceTransactionsQueryVariables
-  >(DeviceTransactionsDocument, options);
-}
-export type DeviceTransactionsQueryHookResult = ReturnType<
-  typeof useDeviceTransactionsQuery
->;
-export type DeviceTransactionsLazyQueryHookResult = ReturnType<
-  typeof useDeviceTransactionsLazyQuery
->;
-export type DeviceTransactionsQueryResult = Apollo.QueryResult<
-  DeviceTransactionsQuery,
-  DeviceTransactionsQueryVariables
->;
-export const UpsertProductListDocument = gql`
-  mutation UpsertProductList(
-    $id: ID
-    $emoji: String
-    $name: String
-    $products: [ProductInput!]
-    $active: Boolean
-  ) {
-    upsertProductList(
-      id: $id
-      emoji: $emoji
-      name: $name
-      products: $products
-      active: $active
-    ) {
-      ...ProductList
-    }
-  }
-  ${ProductListFragmentDoc}
-`;
-export type UpsertProductListMutationFn = Apollo.MutationFunction<
-  UpsertProductListMutation,
-  UpsertProductListMutationVariables
->;
-
-/**
- * __useUpsertProductListMutation__
- *
- * To run a mutation, you first call `useUpsertProductListMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpsertProductListMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [upsertProductListMutation, { data, loading, error }] = useUpsertProductListMutation({
- *   variables: {
- *      id: // value for 'id'
- *      emoji: // value for 'emoji'
- *      name: // value for 'name'
- *      products: // value for 'products'
- *      active: // value for 'active'
- *   },
- * });
- */
-export function useUpsertProductListMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    UpsertProductListMutation,
-    UpsertProductListMutationVariables
-  >,
-) {
-  const options = {...defaultOptions, ...baseOptions};
-  return Apollo.useMutation<
-    UpsertProductListMutation,
-    UpsertProductListMutationVariables
-  >(UpsertProductListDocument, options);
-}
-export type UpsertProductListMutationHookResult = ReturnType<
-  typeof useUpsertProductListMutation
->;
-export type UpsertProductListMutationResult =
-  Apollo.MutationResult<UpsertProductListMutation>;
-export type UpsertProductListMutationOptions = Apollo.BaseMutationOptions<
-  UpsertProductListMutation,
-  UpsertProductListMutationVariables
->;
-export const RevenueDetailsDocument = gql`
-  query RevenueDetails(
-    $id: ID!
-    $after: DateTime!
-    $before: DateTime!
-    $grouping: TimeGrouping!
-  ) {
-    productList: node(id: $id) {
-      ... on ProductList {
-        id
-        name
-        salesNumbers(after: $after, before: $before) {
-          timeSeries(grouping: $grouping) {
-            time
-            value
-          }
-          payment
-        }
-        historicalProducts {
-          name
-          salesNumbers(after: $after, before: $before) {
-            count
-            total
-            payment
-          }
-        }
-      }
-    }
-  }
-`;
-
-/**
- * __useRevenueDetailsQuery__
- *
- * To run a query within a React component, call `useRevenueDetailsQuery` and pass it any options that fit your needs.
- * When your component renders, `useRevenueDetailsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useRevenueDetailsQuery({
- *   variables: {
- *      id: // value for 'id'
- *      after: // value for 'after'
- *      before: // value for 'before'
- *      grouping: // value for 'grouping'
- *   },
- * });
- */
-export function useRevenueDetailsQuery(
-  baseOptions: Apollo.QueryHookOptions<
-    RevenueDetailsQuery,
-    RevenueDetailsQueryVariables
-  >,
-) {
-  const options = {...defaultOptions, ...baseOptions};
-  return Apollo.useQuery<RevenueDetailsQuery, RevenueDetailsQueryVariables>(
-    RevenueDetailsDocument,
-    options,
-  );
-}
-export function useRevenueDetailsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    RevenueDetailsQuery,
-    RevenueDetailsQueryVariables
-  >,
-) {
-  const options = {...defaultOptions, ...baseOptions};
-  return Apollo.useLazyQuery<RevenueDetailsQuery, RevenueDetailsQueryVariables>(
-    RevenueDetailsDocument,
-    options,
-  );
-}
-export type RevenueDetailsQueryHookResult = ReturnType<
-  typeof useRevenueDetailsQuery
->;
-export type RevenueDetailsLazyQueryHookResult = ReturnType<
-  typeof useRevenueDetailsLazyQuery
->;
-export type RevenueDetailsQueryResult = Apollo.QueryResult<
-  RevenueDetailsQuery,
-  RevenueDetailsQueryVariables
->;
 export const BandApplcationsDocument = gql`
   query BandApplcations($id: ID!) {
     viewer {
@@ -2077,522 +1434,58 @@ export type BandApplcationsQueryResult = Apollo.QueryResult<
   BandApplcationsQuery,
   BandApplcationsQueryVariables
 >;
-export const EventsDocument = gql`
-  query Events {
-    events {
+export const BandApplicationRatingDocument = gql`
+  mutation BandApplicationRating($id: ID!, $rating: Int) {
+    rateBandApplication(bandApplicationId: $id, rating: $rating) {
       id
-      name
+      ...Rating
     }
   }
+  ${RatingFragmentDoc}
 `;
-
-/**
- * __useEventsQuery__
- *
- * To run a query within a React component, call `useEventsQuery` and pass it any options that fit your needs.
- * When your component renders, `useEventsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useEventsQuery({
- *   variables: {
- *   },
- * });
- */
-export function useEventsQuery(
-  baseOptions?: Apollo.QueryHookOptions<EventsQuery, EventsQueryVariables>,
-) {
-  const options = {...defaultOptions, ...baseOptions};
-  return Apollo.useQuery<EventsQuery, EventsQueryVariables>(
-    EventsDocument,
-    options,
-  );
-}
-export function useEventsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<EventsQuery, EventsQueryVariables>,
-) {
-  const options = {...defaultOptions, ...baseOptions};
-  return Apollo.useLazyQuery<EventsQuery, EventsQueryVariables>(
-    EventsDocument,
-    options,
-  );
-}
-export type EventsQueryHookResult = ReturnType<typeof useEventsQuery>;
-export type EventsLazyQueryHookResult = ReturnType<typeof useEventsLazyQuery>;
-export type EventsQueryResult = Apollo.QueryResult<
-  EventsQuery,
-  EventsQueryVariables
->;
-export const CardInfoDocument = gql`
-  query CardInfo($cardID: ID!) {
-    config {
-      depositValue
-    }
-    node(id: $cardID) {
-      ... on Card {
-        id
-        transactions {
-          balanceTotal
-          data {
-            clientId
-            transactionType
-            balanceAfter
-            balanceBefore
-            depositAfter
-            depositBefore
-            deviceTime
-            Order {
-              total
-              items {
-                amount
-                name
-                productList {
-                  emoji
-                  name
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
-/**
- * __useCardInfoQuery__
- *
- * To run a query within a React component, call `useCardInfoQuery` and pass it any options that fit your needs.
- * When your component renders, `useCardInfoQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useCardInfoQuery({
- *   variables: {
- *      cardID: // value for 'cardID'
- *   },
- * });
- */
-export function useCardInfoQuery(
-  baseOptions: Apollo.QueryHookOptions<CardInfoQuery, CardInfoQueryVariables>,
-) {
-  const options = {...defaultOptions, ...baseOptions};
-  return Apollo.useQuery<CardInfoQuery, CardInfoQueryVariables>(
-    CardInfoDocument,
-    options,
-  );
-}
-export function useCardInfoLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    CardInfoQuery,
-    CardInfoQueryVariables
-  >,
-) {
-  const options = {...defaultOptions, ...baseOptions};
-  return Apollo.useLazyQuery<CardInfoQuery, CardInfoQueryVariables>(
-    CardInfoDocument,
-    options,
-  );
-}
-export type CardInfoQueryHookResult = ReturnType<typeof useCardInfoQuery>;
-export type CardInfoLazyQueryHookResult = ReturnType<
-  typeof useCardInfoLazyQuery
->;
-export type CardInfoQueryResult = Apollo.QueryResult<
-  CardInfoQuery,
-  CardInfoQueryVariables
->;
-export const DevicesDocument = gql`
-  query Devices {
-    devices(type: CONTACTLESS_TERMINAL) {
-      id
-      lastSeen
-      softwareVersion
-      productList {
-        id
-        name
-      }
-    }
-    productLists {
-      id
-      name
-      active
-    }
-  }
-`;
-
-/**
- * __useDevicesQuery__
- *
- * To run a query within a React component, call `useDevicesQuery` and pass it any options that fit your needs.
- * When your component renders, `useDevicesQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useDevicesQuery({
- *   variables: {
- *   },
- * });
- */
-export function useDevicesQuery(
-  baseOptions?: Apollo.QueryHookOptions<DevicesQuery, DevicesQueryVariables>,
-) {
-  const options = {...defaultOptions, ...baseOptions};
-  return Apollo.useQuery<DevicesQuery, DevicesQueryVariables>(
-    DevicesDocument,
-    options,
-  );
-}
-export function useDevicesLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    DevicesQuery,
-    DevicesQueryVariables
-  >,
-) {
-  const options = {...defaultOptions, ...baseOptions};
-  return Apollo.useLazyQuery<DevicesQuery, DevicesQueryVariables>(
-    DevicesDocument,
-    options,
-  );
-}
-export type DevicesQueryHookResult = ReturnType<typeof useDevicesQuery>;
-export type DevicesLazyQueryHookResult = ReturnType<typeof useDevicesLazyQuery>;
-export type DevicesQueryResult = Apollo.QueryResult<
-  DevicesQuery,
-  DevicesQueryVariables
->;
-export const UpdateDeviceListDocument = gql`
-  mutation UpdateDeviceList($productListId: ID!, $deviceId: ID!) {
-    updateDeviceProductList(
-      productListId: $productListId
-      deviceId: $deviceId
-    ) {
-      id
-      productList {
-        id
-        name
-      }
-    }
-  }
-`;
-export type UpdateDeviceListMutationFn = Apollo.MutationFunction<
-  UpdateDeviceListMutation,
-  UpdateDeviceListMutationVariables
+export type BandApplicationRatingMutationFn = Apollo.MutationFunction<
+  BandApplicationRatingMutation,
+  BandApplicationRatingMutationVariables
 >;
 
 /**
- * __useUpdateDeviceListMutation__
+ * __useBandApplicationRatingMutation__
  *
- * To run a mutation, you first call `useUpdateDeviceListMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateDeviceListMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useBandApplicationRatingMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useBandApplicationRatingMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [updateDeviceListMutation, { data, loading, error }] = useUpdateDeviceListMutation({
+ * const [bandApplicationRatingMutation, { data, loading, error }] = useBandApplicationRatingMutation({
  *   variables: {
- *      productListId: // value for 'productListId'
- *      deviceId: // value for 'deviceId'
+ *      id: // value for 'id'
+ *      rating: // value for 'rating'
  *   },
  * });
  */
-export function useUpdateDeviceListMutation(
+export function useBandApplicationRatingMutation(
   baseOptions?: Apollo.MutationHookOptions<
-    UpdateDeviceListMutation,
-    UpdateDeviceListMutationVariables
+    BandApplicationRatingMutation,
+    BandApplicationRatingMutationVariables
   >,
 ) {
   const options = {...defaultOptions, ...baseOptions};
   return Apollo.useMutation<
-    UpdateDeviceListMutation,
-    UpdateDeviceListMutationVariables
-  >(UpdateDeviceListDocument, options);
+    BandApplicationRatingMutation,
+    BandApplicationRatingMutationVariables
+  >(BandApplicationRatingDocument, options);
 }
-export type UpdateDeviceListMutationHookResult = ReturnType<
-  typeof useUpdateDeviceListMutation
+export type BandApplicationRatingMutationHookResult = ReturnType<
+  typeof useBandApplicationRatingMutation
 >;
-export type UpdateDeviceListMutationResult =
-  Apollo.MutationResult<UpdateDeviceListMutation>;
-export type UpdateDeviceListMutationOptions = Apollo.BaseMutationOptions<
-  UpdateDeviceListMutation,
-  UpdateDeviceListMutationVariables
->;
-export const ProductListDocument = gql`
-  query ProductList {
-    productLists {
-      id
-      ...ProductList
-    }
-  }
-  ${ProductListFragmentDoc}
-`;
-
-/**
- * __useProductListQuery__
- *
- * To run a query within a React component, call `useProductListQuery` and pass it any options that fit your needs.
- * When your component renders, `useProductListQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useProductListQuery({
- *   variables: {
- *   },
- * });
- */
-export function useProductListQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-    ProductListQuery,
-    ProductListQueryVariables
-  >,
-) {
-  const options = {...defaultOptions, ...baseOptions};
-  return Apollo.useQuery<ProductListQuery, ProductListQueryVariables>(
-    ProductListDocument,
-    options,
-  );
-}
-export function useProductListLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    ProductListQuery,
-    ProductListQueryVariables
-  >,
-) {
-  const options = {...defaultOptions, ...baseOptions};
-  return Apollo.useLazyQuery<ProductListQuery, ProductListQueryVariables>(
-    ProductListDocument,
-    options,
-  );
-}
-export type ProductListQueryHookResult = ReturnType<typeof useProductListQuery>;
-export type ProductListLazyQueryHookResult = ReturnType<
-  typeof useProductListLazyQuery
->;
-export type ProductListQueryResult = Apollo.QueryResult<
-  ProductListQuery,
-  ProductListQueryVariables
->;
-export const CreateProductListDocument = gql`
-  mutation CreateProductList($name: String!) {
-    upsertProductList(name: $name) {
-      ...ProductList
-    }
-  }
-  ${ProductListFragmentDoc}
-`;
-export type CreateProductListMutationFn = Apollo.MutationFunction<
-  CreateProductListMutation,
-  CreateProductListMutationVariables
->;
-
-/**
- * __useCreateProductListMutation__
- *
- * To run a mutation, you first call `useCreateProductListMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateProductListMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [createProductListMutation, { data, loading, error }] = useCreateProductListMutation({
- *   variables: {
- *      name: // value for 'name'
- *   },
- * });
- */
-export function useCreateProductListMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    CreateProductListMutation,
-    CreateProductListMutationVariables
-  >,
-) {
-  const options = {...defaultOptions, ...baseOptions};
-  return Apollo.useMutation<
-    CreateProductListMutation,
-    CreateProductListMutationVariables
-  >(CreateProductListDocument, options);
-}
-export type CreateProductListMutationHookResult = ReturnType<
-  typeof useCreateProductListMutation
->;
-export type CreateProductListMutationResult =
-  Apollo.MutationResult<CreateProductListMutation>;
-export type CreateProductListMutationOptions = Apollo.BaseMutationOptions<
-  CreateProductListMutation,
-  CreateProductListMutationVariables
->;
-export const ProductPrintDocument = gql`
-  query ProductPrint {
-    productLists {
-      id
-      emoji
-      name
-      active
-      product {
-        id
-        name
-        price
-        requiresDeposit
-      }
-    }
-    config {
-      depositValue
-    }
-  }
-`;
-
-/**
- * __useProductPrintQuery__
- *
- * To run a query within a React component, call `useProductPrintQuery` and pass it any options that fit your needs.
- * When your component renders, `useProductPrintQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useProductPrintQuery({
- *   variables: {
- *   },
- * });
- */
-export function useProductPrintQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-    ProductPrintQuery,
-    ProductPrintQueryVariables
-  >,
-) {
-  const options = {...defaultOptions, ...baseOptions};
-  return Apollo.useQuery<ProductPrintQuery, ProductPrintQueryVariables>(
-    ProductPrintDocument,
-    options,
-  );
-}
-export function useProductPrintLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    ProductPrintQuery,
-    ProductPrintQueryVariables
-  >,
-) {
-  const options = {...defaultOptions, ...baseOptions};
-  return Apollo.useLazyQuery<ProductPrintQuery, ProductPrintQueryVariables>(
-    ProductPrintDocument,
-    options,
-  );
-}
-export type ProductPrintQueryHookResult = ReturnType<
-  typeof useProductPrintQuery
->;
-export type ProductPrintLazyQueryHookResult = ReturnType<
-  typeof useProductPrintLazyQuery
->;
-export type ProductPrintQueryResult = Apollo.QueryResult<
-  ProductPrintQuery,
-  ProductPrintQueryVariables
->;
-export const RevenueDocument = gql`
-  query Revenue($after: DateTime!, $before: DateTime!) {
-    config {
-      depositValue
-    }
-    events {
-      id
-      name
-      start
-      end
-    }
-    productLists {
-      id
-      name
-      salesNumbers(after: $after, before: $before) {
-        count
-        total
-        payment
-      }
-    }
-    transactions {
-      topUps: transactions(after: $after, before: $before, type: TopUp) {
-        balanceTotal
-        totalCount
-        depositIn
-        depositOut
-      }
-      cashouts: transactions(after: $after, before: $before, type: Cashout) {
-        balanceTotal
-        totalCount
-        depositIn
-        depositOut
-      }
-      charges: transactions(after: $after, before: $before, type: Charge) {
-        balanceTotal
-        totalCount
-        depositIn
-        depositOut
-      }
-      transactions(after: $after, before: $before) {
-        depositIn
-        depositOut
-        uniqueCards
-      }
-    }
-  }
-`;
-
-/**
- * __useRevenueQuery__
- *
- * To run a query within a React component, call `useRevenueQuery` and pass it any options that fit your needs.
- * When your component renders, `useRevenueQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useRevenueQuery({
- *   variables: {
- *      after: // value for 'after'
- *      before: // value for 'before'
- *   },
- * });
- */
-export function useRevenueQuery(
-  baseOptions: Apollo.QueryHookOptions<RevenueQuery, RevenueQueryVariables>,
-) {
-  const options = {...defaultOptions, ...baseOptions};
-  return Apollo.useQuery<RevenueQuery, RevenueQueryVariables>(
-    RevenueDocument,
-    options,
-  );
-}
-export function useRevenueLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    RevenueQuery,
-    RevenueQueryVariables
-  >,
-) {
-  const options = {...defaultOptions, ...baseOptions};
-  return Apollo.useLazyQuery<RevenueQuery, RevenueQueryVariables>(
-    RevenueDocument,
-    options,
-  );
-}
-export type RevenueQueryHookResult = ReturnType<typeof useRevenueQuery>;
-export type RevenueLazyQueryHookResult = ReturnType<typeof useRevenueLazyQuery>;
-export type RevenueQueryResult = Apollo.QueryResult<
-  RevenueQuery,
-  RevenueQueryVariables
+export type BandApplicationRatingMutationResult =
+  Apollo.MutationResult<BandApplicationRatingMutation>;
+export type BandApplicationRatingMutationOptions = Apollo.BaseMutationOptions<
+  BandApplicationRatingMutation,
+  BandApplicationRatingMutationVariables
 >;
 export const ViewerContextProviderDocument = gql`
   query ViewerContextProvider {

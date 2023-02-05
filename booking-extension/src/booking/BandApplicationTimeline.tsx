@@ -6,7 +6,7 @@ import {
   BandApplicationTimelineFragment,
   useBandApplicationCommentDeleteMutation,
   useBandApplicationCommentMutation,
-} from './graphql';
+} from './types/graphql';
 import useViewerContext from './useViewerContext';
 import RelativeDate from './RelativeDate';
 import ViewerAvatar from './ViewerAvatar';
