@@ -1,34 +1,31 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import "./App.css";
+import {useState} from 'react';
+import {ApolloProvider} from '@apollo/client';
+import BandApplicationDetails from './BandApplicationDetails';
+import useApolloClient from './useApolloClient';
+import BookingTable from './BookingTable';
+import {ConfigProvider, theme} from 'antd/es';
+import deDE from 'antd/locale/de_DE';
 
-function App() {
-  const [count, setCount] = useState(0);
+export default function Booking() {
+  const [selected, setSelected] = useState<string | null>(null);
+  const client = useApolloClient();
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/booking/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
+    <ApolloProvider client={client}>
+      <ConfigProvider
+        locale={deDE}
+        theme={{
+          token: {
+            fontSizeHeading5: theme.defaultConfig.token.fontSize,
+          },
+        }}
+      >
+        <BookingTable onSelect={setSelected} />
+        <BandApplicationDetails
+          bandApplicationId={selected}
+          onClose={() => setSelected(null)}
+        />
+      </ConfigProvider>
+    </ApolloProvider>
   );
 }
-
-export default App;

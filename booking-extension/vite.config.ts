@@ -7,5 +7,8 @@ export default defineConfig({
   build: {
     outDir: "./dist/public",
   },
+  server: {
+    port: 3000,
+  },
   base: "/booking",
 });
