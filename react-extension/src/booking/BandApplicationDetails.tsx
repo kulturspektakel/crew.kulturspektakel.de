@@ -16,15 +16,15 @@ import {
   ApplicationDetailsQuery,
   useMarkAsContextedMutation,
   PreviouslyPlayed,
-} from './types/graphql';
-import useViewerContext from './useViewerContext';
+} from '../utils/graphql';
+import useViewerContext from '../utils/useViewerContext';
 import Demo from './Demo';
 import Rater from './Rater';
 import Rating from './Rating';
 import {GlobalOutlined} from '@ant-design/icons';
 import styles from './BandApplicationDetails.module.css';
 import BandApplicationTimeline from './BandApplicationTimeline';
-import Clipboard from './Clipboard';
+import Clipboard from '../utils/Clipboard';
 import {GENRE_CATEGORIES, GENRE_ICONS} from './genre';
 import GoogleMaps from './GoogleMaps';
 

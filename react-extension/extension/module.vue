@@ -1,6 +1,6 @@
 <template>
   <private-view title="Booking" smallHeader=true>
-    <iframe class="iframe" src="/booking" />
+    <iframe class="iframe" src="/react" />
   </private-view>
 </template>
 

@@ -1,6 +1,6 @@
 import {gql} from '@apollo/client';
 import {Avatar, AvatarProps} from 'antd/es';
-import {AvatarFragment} from './types/graphql';
+import {AvatarFragment} from './graphql';
 
 gql`
   fragment Avatar on Viewer {

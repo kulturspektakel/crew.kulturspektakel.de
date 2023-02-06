@@ -3,7 +3,7 @@ import React, {useContext} from 'react';
 import {
   useViewerContextProviderQuery,
   ViewerContextProviderQuery,
-} from './types/graphql';
+} from './graphql';
 
 export const ViewerQ = gql`
   query ViewerContextProvider {

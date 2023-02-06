@@ -1,7 +1,7 @@
 import {gql} from '@apollo/client';
 import {Wrapper} from '@googlemaps/react-wrapper';
 import {useRef, useEffect} from 'react';
-import {GoogleMapsFragment} from './types/graphql';
+import {GoogleMapsFragment} from '../utils/graphql';
 
 gql`
   fragment GoogleMaps on BandApplication {

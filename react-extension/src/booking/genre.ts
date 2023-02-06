@@ -1,4 +1,4 @@
-import {GenreCategory} from './types/graphql';
+import {GenreCategory} from '../utils/graphql';
 
 import iconPop from './assets/pop.svg';
 import iconRock from './assets/rock.svg';

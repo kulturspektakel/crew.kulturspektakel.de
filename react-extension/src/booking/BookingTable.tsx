@@ -1,10 +1,10 @@
 import {Avatar, Table, theme, Tooltip, Typography} from 'antd/es';
 import React, {useMemo} from 'react';
 import {gql} from '@apollo/client';
-import {BandApplcationsQuery, useBandApplcationsQuery} from './types/graphql';
+import {BandApplcationsQuery, useBandApplcationsQuery} from '../utils/graphql';
 import Rater from './Rater';
 import AutoSizer from 'react-virtualized-auto-sizer';
-import useViewerContext from './useViewerContext';
+import useViewerContext from '../utils/useViewerContext';
 import Rating from './Rating';
 import {CommentOutlined} from '@ant-design/icons';
 import {GENRE_CATEGORIES, GENRE_ICONS} from './genre';

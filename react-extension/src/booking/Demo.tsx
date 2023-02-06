@@ -1,7 +1,7 @@
 import {LinkOutlined} from '@ant-design/icons';
 import {gql} from '@apollo/client';
 import {Typography} from 'antd';
-import {DemoEmbedType, DemoFragment} from './types/graphql';
+import {DemoEmbedType, DemoFragment} from '../utils/graphql';
 
 gql`
   fragment Demo on BandApplication {

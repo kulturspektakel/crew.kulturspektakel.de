@@ -3,8 +3,8 @@ import {Rate, theme} from 'antd/es';
 import {
   useBandApplicationRatingMutation,
   RatingFragment,
-} from './types/graphql';
-import useViewerContext from './useViewerContext';
+} from '../utils/graphql';
+import useViewerContext from '../utils/useViewerContext';
 
 gql`
   mutation BandApplicationRating($id: ID!, $rating: Int) {

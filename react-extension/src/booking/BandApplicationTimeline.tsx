@@ -6,10 +6,10 @@ import {
   BandApplicationTimelineFragment,
   useBandApplicationCommentDeleteMutation,
   useBandApplicationCommentMutation,
-} from './types/graphql';
-import useViewerContext from './useViewerContext';
-import RelativeDate from './RelativeDate';
-import ViewerAvatar from './ViewerAvatar';
+} from '../utils/graphql';
+import useViewerContext from '../utils/useViewerContext';
+import RelativeDate from '../utils/RelativeDate';
+import ViewerAvatar from '../utils/ViewerAvatar';
 
 gql`
   fragment BandApplicationTimeline on BandApplication {

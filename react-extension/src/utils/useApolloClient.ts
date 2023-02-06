@@ -8,7 +8,7 @@ import {
 import {withScalars} from 'apollo-link-scalars';
 import {buildClientSchema, IntrospectionQuery} from 'graphql';
 import {GraphQLDate, GraphQLDateTime} from 'graphql-scalars';
-import introspectionResult from './types/graphql.schema.json';
+import introspectionResult from './graphql.schema.json';
 
 export default function useApolloClient() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
