@@ -6,7 +6,7 @@
   "scripts": {
     "start": "vite",
     "graphql": "graphql-codegen --config ./.graphqlrc.yml",
-    "build": "directus-extension build && tsc && vite build",
+    "build": "tsc && vite build --emptyOutDir && directus-extension build",
     "setup": "directus-extension link ../extensions"
   },
   "directus:extension": {
@@ -36,6 +36,7 @@
     "antd": "^5.1.7",
     "apollo-link-scalars": "^4.0.1",
     "graphql-scalars": "^1.20.1",
+    "jwt-decode": "^3.1.2",
     "react": "18",
     "react-dom": "18",
     "react-virtualized-auto-sizer": "^1.0.7"

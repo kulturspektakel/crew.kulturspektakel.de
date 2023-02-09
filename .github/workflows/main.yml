@@ -19,17 +19,28 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           known_hosts: ${{ secrets.KNOWN_HOSTS }}
           if_key_exists: replace
-      - name: deploy
-        env:
-          Host: kultursp@kulturspektakel.de
-          Dir: /var/www/virtual/kultursp/cms.kulturspektakel.de
-          Dotenv: ${{ secrets.DOTENV_ME }}
+      - name: install
         run: |
           yarn
+          cd react-extension
+          yarn
+          cd ..
+      - name: env
+        env:
+          Dotenv: ${{ secrets.DOTENV_ME }}
+        run: |
           echo "DOTENV_ME=$Dotenv" > .env.me
           yarn dotenv-vault pull
           yarn dotenv-vault pull production
           yarn ts-node scripts/merge-envs.ts
+      - name: deploy
+        env:
+          Host: kultursp@kulturspektakel.de
+          Dir: /var/www/virtual/kultursp/cms.kulturspektakel.de
+        run: |
+          cd react-extension
+          yarn build
+          cd ..
           rm -rf .env.me
           rm -rf node_modules
           rsync -avz --delete . $Host:$Dir

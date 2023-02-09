@@ -6,10 +6,12 @@ export default defineConfig({
   plugins: [react()],
   build: {
     outDir: '../dist/public',
+    assetsInlineLimit: 0,
   },
   server: {
     port: 3000,
   },
   base: '/react',
   root: './src',
+  envDir: '../../',
 });

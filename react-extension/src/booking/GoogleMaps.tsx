@@ -2,6 +2,7 @@ import {gql} from '@apollo/client';
 import {Wrapper} from '@googlemaps/react-wrapper';
 import {useRef, useEffect} from 'react';
 import {GoogleMapsFragment} from '../utils/graphql';
+import marker from './assets/marker.png?url';
 
 gql`
   fragment GoogleMaps on BandApplication {
@@ -12,7 +13,7 @@ gql`
 
 export default function GoogleMaps(props: GoogleMapsFragment) {
   return (
-    <Wrapper apiKey={''}>
+    <Wrapper apiKey={import.meta.env.VITE_GOOGLE_MAPS_KEY}>
       <MapComponent {...props} />
     </Wrapper>
   );
@@ -46,7 +47,7 @@ function MapComponent({latitude, longitude}: GoogleMapsFragment) {
     new google.maps.Marker({
       position: kult,
       icon: {
-        url: '/marker.png',
+        url: marker,
         size: new google.maps.Size(52, 74),
         origin: new google.maps.Point(0, 0),
         anchor: new google.maps.Point(13, 37),
