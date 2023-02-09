@@ -22,9 +22,6 @@ jobs:
       - name: install
         run: |
           yarn
-          cd react-extension
-          yarn
-          cd ..
       - name: env
         env:
           Dotenv: ${{ secrets.DOTENV_ME }}
@@ -33,15 +30,19 @@ jobs:
           yarn dotenv-vault pull
           yarn dotenv-vault pull production
           yarn ts-node scripts/merge-envs.ts
+          rm -rf .env.me
+      - name: react-extension
+        run: |
+          cd react-extension
+          yarn
+          yarn build
+          rm -rf node_modules
+          cd ..
       - name: deploy
         env:
           Host: kultursp@kulturspektakel.de
           Dir: /var/www/virtual/kultursp/cms.kulturspektakel.de
         run: |
-          cd react-extension
-          yarn build
-          cd ..
-          rm -rf .env.me
           rm -rf node_modules
           rsync -avz --delete . $Host:$Dir
           ssh $Host "cd $Dir && ./scripts/deploy.sh"
