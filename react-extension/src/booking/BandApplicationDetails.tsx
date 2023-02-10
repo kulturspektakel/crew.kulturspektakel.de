@@ -14,8 +14,8 @@ import {useCallback, useEffect, useRef} from 'react';
 import {
   useApplicationDetailsQuery,
   ApplicationDetailsQuery,
-  useMarkAsContextedMutation,
   PreviouslyPlayed,
+  useUpdateBandApplicationMutation,
 } from '../utils/graphql';
 import useViewerContext from '../utils/useViewerContext';
 import Demo from './Demo';
@@ -72,12 +72,10 @@ gql`
     }
   }
 
-  mutation MarkAsContexted($id: ID!, $contacted: Boolean!) {
-    markBandApplicationContacted(
-      bandApplicationId: $id
-      contacted: $contacted
-    ) {
+  mutation UpdateBandApplication($id: ID!, $data: BandApplicationUpdateInput!) {
+    updateBandApplication(bandApplicationId: $id, data: $data) {
       id
+      instagramFollower
       ...ContactedBy
     }
   }
@@ -167,25 +165,27 @@ export default function BandApplicationDetails({
   );
 }
 
-type Props = Extract<
+type BandApplication = Extract<
   ApplicationDetailsQuery['node'],
   {__typename?: 'BandApplication'}
 >;
 
-function DrawerContent(props: Props) {
+function DrawerContent(props: BandApplication) {
   const viewer = useViewerContext();
-  const [contacted] = useMarkAsContextedMutation();
+  const [contacted] = useUpdateBandApplicationMutation();
   const {token} = theme.useToken();
 
   const onContact = useCallback(
     (c: boolean) =>
       contacted({
         variables: {
-          contacted: c,
           id: props.id,
+          data: {
+            contacted: c,
+          },
         },
         optimisticResponse: () => ({
-          markBandApplicationContacted: {
+          updateBandApplication: {
             __typename: 'BandApplication',
             id: props.id,
             contactedByViewer: c ? viewer : null,

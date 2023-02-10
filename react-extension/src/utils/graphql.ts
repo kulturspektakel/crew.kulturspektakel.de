@@ -116,6 +116,11 @@ export type BandApplicationRating = {
   viewer: Viewer;
 };
 
+export type BandApplicationUpdateInput = {
+  contacted?: InputMaybe<Scalars['Boolean']>;
+  instagramFollower?: InputMaybe<Scalars['Int']>;
+};
+
 export type BandPlaying = Node & {
   __typename?: 'BandPlaying';
   area: Area;
@@ -334,6 +339,7 @@ export type Mutation = {
   deleteBandApplicationComment: BandApplication;
   markBandApplicationContacted: BandApplication;
   rateBandApplication: BandApplication;
+  updateBandApplication: BandApplication;
   updateDeviceProductList: Device;
   upsertProductList: ProductList;
 };
@@ -365,6 +371,11 @@ export type MutationMarkBandApplicationContactedArgs = {
 export type MutationRateBandApplicationArgs = {
   bandApplicationId: Scalars['ID'];
   rating?: InputMaybe<Scalars['Int']>;
+};
+
+export type MutationUpdateBandApplicationArgs = {
+  bandApplicationId: Scalars['ID'];
+  data?: InputMaybe<BandApplicationUpdateInput>;
 };
 
 export type MutationUpdateDeviceProductListArgs = {
@@ -730,16 +741,17 @@ export type ContactedByFragment = {
   } | null;
 };
 
-export type MarkAsContextedMutationVariables = Exact<{
+export type UpdateBandApplicationMutationVariables = Exact<{
   id: Scalars['ID'];
-  contacted: Scalars['Boolean'];
+  data: BandApplicationUpdateInput;
 }>;
 
-export type MarkAsContextedMutation = {
+export type UpdateBandApplicationMutation = {
   __typename?: 'Mutation';
-  markBandApplicationContacted: {
+  updateBandApplication: {
     __typename?: 'BandApplication';
     id: string;
+    instagramFollower?: number | null;
     contactedByViewer?: {
       __typename?: 'Viewer';
       id: string;
@@ -1197,61 +1209,59 @@ export type ApplicationDetailsQueryResult = Apollo.QueryResult<
   ApplicationDetailsQuery,
   ApplicationDetailsQueryVariables
 >;
-export const MarkAsContextedDocument = gql`
-  mutation MarkAsContexted($id: ID!, $contacted: Boolean!) {
-    markBandApplicationContacted(
-      bandApplicationId: $id
-      contacted: $contacted
-    ) {
+export const UpdateBandApplicationDocument = gql`
+  mutation UpdateBandApplication($id: ID!, $data: BandApplicationUpdateInput!) {
+    updateBandApplication(bandApplicationId: $id, data: $data) {
       id
+      instagramFollower
       ...ContactedBy
     }
   }
   ${ContactedByFragmentDoc}
 `;
-export type MarkAsContextedMutationFn = Apollo.MutationFunction<
-  MarkAsContextedMutation,
-  MarkAsContextedMutationVariables
+export type UpdateBandApplicationMutationFn = Apollo.MutationFunction<
+  UpdateBandApplicationMutation,
+  UpdateBandApplicationMutationVariables
 >;
 
 /**
- * __useMarkAsContextedMutation__
+ * __useUpdateBandApplicationMutation__
  *
- * To run a mutation, you first call `useMarkAsContextedMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useMarkAsContextedMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useUpdateBandApplicationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateBandApplicationMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [markAsContextedMutation, { data, loading, error }] = useMarkAsContextedMutation({
+ * const [updateBandApplicationMutation, { data, loading, error }] = useUpdateBandApplicationMutation({
  *   variables: {
  *      id: // value for 'id'
- *      contacted: // value for 'contacted'
+ *      data: // value for 'data'
  *   },
  * });
  */
-export function useMarkAsContextedMutation(
+export function useUpdateBandApplicationMutation(
   baseOptions?: Apollo.MutationHookOptions<
-    MarkAsContextedMutation,
-    MarkAsContextedMutationVariables
+    UpdateBandApplicationMutation,
+    UpdateBandApplicationMutationVariables
   >,
 ) {
   const options = {...defaultOptions, ...baseOptions};
   return Apollo.useMutation<
-    MarkAsContextedMutation,
-    MarkAsContextedMutationVariables
-  >(MarkAsContextedDocument, options);
+    UpdateBandApplicationMutation,
+    UpdateBandApplicationMutationVariables
+  >(UpdateBandApplicationDocument, options);
 }
-export type MarkAsContextedMutationHookResult = ReturnType<
-  typeof useMarkAsContextedMutation
+export type UpdateBandApplicationMutationHookResult = ReturnType<
+  typeof useUpdateBandApplicationMutation
 >;
-export type MarkAsContextedMutationResult =
-  Apollo.MutationResult<MarkAsContextedMutation>;
-export type MarkAsContextedMutationOptions = Apollo.BaseMutationOptions<
-  MarkAsContextedMutation,
-  MarkAsContextedMutationVariables
+export type UpdateBandApplicationMutationResult =
+  Apollo.MutationResult<UpdateBandApplicationMutation>;
+export type UpdateBandApplicationMutationOptions = Apollo.BaseMutationOptions<
+  UpdateBandApplicationMutation,
+  UpdateBandApplicationMutationVariables
 >;
 export const BandApplicationCommentDocument = gql`
   mutation BandApplicationComment($input: BandApplicationCommentInput!) {
