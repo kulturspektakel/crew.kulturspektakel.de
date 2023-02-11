@@ -31,13 +31,10 @@ jobs:
           yarn dotenv-vault pull production
           yarn ts-node scripts/merge-envs.ts
           rm -rf .env.me
-      - name: react-extension
+      - name: build
         run: |
-          cd react-extension
-          yarn
           yarn build
-          rm -rf node_modules
-          cd ..
+          rm -rf node_modules packages
       - name: deploy
         env:
           Host: kultursp@kulturspektakel.de

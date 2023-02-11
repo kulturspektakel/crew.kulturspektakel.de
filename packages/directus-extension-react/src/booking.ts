@@ -9,6 +9,16 @@ export default defineModule({
     {
       path: '',
       component: ModuleComponent,
+      beforeEnter() {
+        return `/booking/kult2023`;
+      },
+    },
+    {
+      path: ':eventId',
+      component: ModuleComponent,
+      props: (route) => ({
+        eventId: route.params.eventId,
+      }),
     },
   ],
 });

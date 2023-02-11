@@ -22,7 +22,7 @@
       },
       {
         "type": "module",
-        "name": "react",
+        "name": "booking",
         "source": "src/booking.ts"
       }
     ],

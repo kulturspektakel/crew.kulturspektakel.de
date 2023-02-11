@@ -94,7 +94,9 @@ gql`
 export default function BookingTable(props: {onSelect: (id: string) => void}) {
   const {data, loading} = useBandApplcationsQuery({
     variables: {
-      id: `Event:kult2023`,
+      id: `Event:${new URL(document.location.toString()).searchParams.get(
+        'eventId',
+      )}`,
     },
   });
 
@@ -209,7 +211,6 @@ const MemoizedTable = React.memo(
           {
             key: 'city',
             title: 'Ort',
-            width: 300,
             dataIndex: 'city',
             sorter: (a, b) => (a.distance ?? 0) - (b.distance ?? 0),
             render: (_, {city, distance}) => (
