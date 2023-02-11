@@ -21,12 +21,18 @@
         </v-list-item>
       </v-list>
     </template>
+
+    <template #sidebar>
+      <sidebar-detail icon="info_outline" :title="t('information')" close>
+      </sidebar-detail>
+    </template>
   </private-view>
 </template>
 
 <script lang="ts">
 import {useItems} from '@directus/extensions-sdk';
 import {ref} from 'vue';
+import {useI18n} from 'vue-i18n';
 
 export default {
   props: {
@@ -36,6 +42,8 @@ export default {
     },
   },
   setup() {
+    const {t} = useI18n();
+
     const {items} = useItems(ref('Event'), {
       sort: ref(['-start']),
       fields: ref(['*']),
@@ -48,7 +56,7 @@ export default {
         },
       }),
     });
-    return {items};
+    return {items, t};
   },
 };
 </script>
