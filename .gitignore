@@ -1,8 +1,9 @@
 /.env
 .DS_Store
-/node_modules
+node_modules
 /uploads
 !/uploads/.gitkeep
+./extensions
 
 .env*
 !.env.project
