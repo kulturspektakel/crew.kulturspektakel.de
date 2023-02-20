@@ -3,7 +3,7 @@
     :title="'Booking ' + eventId.replace('kult', '')"
     smallHeader="true"
   >
-    <iframe class="iframe" :src="'/react?eventId=' + eventId"></iframe>
+    <iframe class="iframe" :src="'/react/?eventId=' + eventId"></iframe>
 
     <template #navigation>
       <v-list nav>
