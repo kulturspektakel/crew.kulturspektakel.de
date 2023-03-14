@@ -19,8 +19,6 @@ export default function Booking() {
     [],
   );
 
-  console.log(client);
-
   return (
     <ApolloProvider client={client}>
       <ViewerContextProvider>
