@@ -155,7 +155,7 @@ const MemoizedTable = React.memo(
               (e.target as any).tagName.toLowerCase(),
             ) && setSelected(r.id),
         })}
-        scroll={{y: height, x: 500}}
+        scroll={{y: height}}
         size="small"
         columns={[
           {

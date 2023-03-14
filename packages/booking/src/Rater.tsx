@@ -1,9 +1,11 @@
 import {gql} from '@apollo/client';
 import {Rate, theme} from 'antd';
 import {
-  useBandApplicationRatingMutation,
   RatingFragment,
+  BandApplicationRatingDocument,
+  useBandApplicationRatingMutation,
 } from 'kulturspektakel-utils/graphql';
+import useApolloClient from 'kulturspektakel-utils/src/useApolloClient';
 import useViewerContext from 'kulturspektakel-utils/src/useViewerContext';
 
 gql`
@@ -24,7 +26,7 @@ export default function Rater({
   bandApplicationRating: RatingFragment['bandApplicationRating'];
   value?: number;
 }) {
-  const [rate] = useBandApplicationRatingMutation();
+  const client = useApolloClient();
   const viewer = useViewerContext();
   const {token} = theme.useToken();
 
@@ -40,7 +42,10 @@ export default function Rater({
         'Auf jeden Fall',
       ]}
       onChange={(rating) =>
-        rate({
+        // using generated mutation hook caused unnecessary rerenders
+        // https://github.com/apollographql/apollo-client/issues/7626
+        client.mutate({
+          mutation: BandApplicationRatingDocument,
           variables: {
             id: bandApplicationId,
             rating: rating === 0 ? null : rating,
