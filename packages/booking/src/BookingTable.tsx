@@ -11,6 +11,7 @@ import useViewerContext from 'kulturspektakel-utils/src/useViewerContext';
 import Rating from './Rating';
 import {CommentOutlined} from '@ant-design/icons';
 import {GENRE_CATEGORIES, GENRE_ICONS} from './genre';
+import QuickType from './QuickType';
 
 gql`
   fragment Rating on BandApplication {
@@ -100,19 +101,19 @@ export default function BookingTable(props: {onSelect: (id: string) => void}) {
     },
   });
 
+  const dataSource =
+    data?.node?.__typename === 'Event' ? data.node.bandApplication : [];
+
   return (
     <div style={{height: '100vh'}}>
+      <QuickType data={dataSource} onSelect={props.onSelect} />
       <AutoSizer>
         {({width, height}) => (
           <div style={{height, width}}>
             <MemoizedTable
               loading={loading}
               height={height - 40}
-              dataSource={
-                data?.node?.__typename === 'Event'
-                  ? data.node.bandApplication
-                  : []
-              }
+              dataSource={dataSource}
               setSelected={props.onSelect}
             />
           </div>
