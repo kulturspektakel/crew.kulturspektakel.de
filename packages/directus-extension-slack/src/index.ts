@@ -6,7 +6,31 @@ const filterHook: FilterHandler<User> = async (
   data,
   {database},
 ) => {
-  const {providerPayload} = data as {
+  async function apiRequest<T>(
+    endpoint: string,
+    init: RequestInit,
+  ): Promise<T> {
+    const [token] = await database('directus_users').whereNotNull('token');
+
+    return await fetch(
+      `${process.env.PUBLIC_URL?.replace('localhost', '127.0.0.1')}${endpoint}`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token.token}`,
+          'Content-Type': 'application/json; charset=utf-8',
+        },
+        ...init,
+      },
+    )
+      .then((res) => res.json())
+      .catch((e) => {
+        console.error(e);
+        return null;
+      });
+  }
+
+  const {providerPayload, identifier} = data as {
     event: 'auth.update' | 'auth.create';
     identifier: string;
     provider: 'slack';
@@ -29,28 +53,38 @@ const filterHook: FilterHandler<User> = async (
     };
   };
 
-  const [token] = await database('directus_users').whereNotNull('token');
+  const [user] = await database('directus_users').where(
+    'external_identifier',
+    identifier,
+  );
 
-  const {
-    data: {id},
-  }: {data: {id: string}} = await fetch(
-    `${process.env.PUBLIC_URL?.replace('localhost', '127.0.0.1')}/files/import`,
-    {
+  if (user?.avatar) {
+    // delete old avatar
+    await apiRequest(`/files/${user?.avatar}`, {
+      method: 'DELETE',
+    });
+  }
+
+  // upload new avatar
+  let avatar: User['avatar'] | null = null;
+  if (providerPayload.userInfo['user.image_192']) {
+    const res = await apiRequest<{data: {id: string}}>('/files/import', {
       method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token.token}`,
-        'Content-Type': 'application/json; charset=utf-8',
-      },
       body: JSON.stringify({
         url: providerPayload.userInfo['user.image_192'],
         data: {
+          id: user?.avatar,
           title: providerPayload.userInfo['user.name'],
           folder: '5ecf7a4d-821a-4e0b-aac8-380c1ef994fe',
         },
       }),
-    },
-  ).then((res) => res.json());
+    });
+    if (res?.data?.id) {
+      avatar = {id: res?.data?.id};
+    }
+  }
 
+  // update Viewer table
   await database('Viewer')
     .insert({
       id: providerPayload.userInfo['user.id'],
@@ -71,7 +105,7 @@ const filterHook: FilterHandler<User> = async (
     first_name,
     last_name: last_name.join(' '),
     email: providerPayload.userInfo['user.email'],
-    avatar: {id},
+    avatar,
   };
 };
 
