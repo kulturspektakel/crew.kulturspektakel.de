@@ -108,7 +108,7 @@ export default function BookingTable(props: {onSelect: (id: string) => void}) {
     <div style={{height: '100vh'}}>
       <QuickType data={dataSource} onSelect={props.onSelect} />
       <AutoSizer>
-        {({width, height}) => (
+        {({width, height = 0}) => (
           <div style={{height, width}}>
             <MemoizedTable
               loading={loading}
