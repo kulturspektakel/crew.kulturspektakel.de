@@ -5,6 +5,11 @@ export default defineModule({
   id: 'redirect',
   name: 'Redirect',
   icon: 'box',
+  hidden: true,
+  preRegisterCheck(user) {
+    console.log(user);
+    return user.role.admin_access === true;
+  },
   routes: [
     {
       path: '',
