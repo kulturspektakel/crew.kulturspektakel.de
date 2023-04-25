@@ -3,7 +3,11 @@
     :title="'Booking ' + eventId.replace('kult', '')"
     smallHeader="true"
   >
-    <iframe class="iframe" :src="'/react/?eventId=' + eventId"></iframe>
+    <iframe
+      ref="iframe"
+      class="iframe"
+      :src="'/react/?eventId=' + eventId"
+    ></iframe>
 
     <template #navigation>
       <v-list nav>
@@ -58,13 +62,25 @@ export default {
     });
     return {items, t};
   },
+  mounted() {
+    setTimeout(() => {
+      this.$refs.iframe.contentWindow.focus();
+    }, 200);
+  },
 };
 </script>
+
+<style>
+#sidebar,
+#main-content .header-bar {
+  display: none;
+}
+</style>
 
 <style scoped>
 .iframe {
   border: 0;
   width: 100%;
-  height: calc(100% - 60px);
+  height: 100%;
 }
 </style>
