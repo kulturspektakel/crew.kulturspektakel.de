@@ -14,10 +14,10 @@ export default defineModule({
       },
     },
     {
-      path: ':eventId',
+      path: ':feature',
       component: ModuleComponent,
       props: (route) => ({
-        eventId: route.params.eventId,
+        feature: route.params.feature,
       }),
     },
   ],

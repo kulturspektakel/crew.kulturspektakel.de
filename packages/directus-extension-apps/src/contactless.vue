@@ -1,34 +1,32 @@
 <template>
-  <v-list nav>
-    <v-list-item
-      v-for="item in items"
-      clickable
-      :key="item.url"
-      :to="`/contactless/${item.url}`"
-      :active="activeUrl === item.url"
-    >
-      <v-list-item-content>
-        <v-text-overflow :text="'tset'" />
-      </v-list-item-content>
-    </v-list-item>
-  </v-list>
+  <v-list-item
+    v-for="item in items"
+    clickable
+    :key="item.url"
+    :to="`/contactless/${item.url}`"
+    :active="feature === item.url"
+  >
+    <v-list-item-icon><v-icon :name="item.icon" /></v-list-item-icon>
+    <v-list-item-content>
+      <v-text-overflow :text="item.label" />
+    </v-list-item-content>
+  </v-list-item>
 </template>
 
 <script lang="ts">
 export default {
   props: {
-    activeUrl: {
+    feature: {
       type: String,
-      default: 'lists',
     },
   },
   setup() {
     return {
       items: [
-        {icon: 'calendar_month', label: 'Preislisten', url: 'lists'},
-        {icon: 'calendar_month', label: 'Geräte', url: 'devices'},
-        {icon: 'calendar_month', label: 'Umsätze', url: 'revenue'},
-        {icon: 'calendar_month', label: 'Token', url: 'token'},
+        {icon: 'sell', label: 'Preislisten', url: 'lists'},
+        {icon: 'smartphone', label: 'Geräte', url: 'devices'},
+        {icon: 'monitoring', label: 'Umsätze', url: 'revenue'},
+        {icon: 'code', label: 'Token', url: 'token'},
       ],
     };
   },

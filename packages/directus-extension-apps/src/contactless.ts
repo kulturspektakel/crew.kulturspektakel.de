@@ -9,6 +9,9 @@ export default defineModule({
     {
       path: '',
       component: ModuleComponent,
+      beforeEnter() {
+        return `/contactless/lists`;
+      },
     },
     {
       path: ':feature',

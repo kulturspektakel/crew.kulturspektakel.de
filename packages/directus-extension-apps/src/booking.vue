@@ -1,18 +1,16 @@
 <template>
-  <v-list nav>
-    <v-list-item
-      v-for="item in items"
-      clickable
-      :key="id"
-      :to="`/booking/${item.id}`"
-      :active="eventId === item.id"
-    >
-      <v-list-item-icon><v-icon name="calendar_month" /></v-list-item-icon>
-      <v-list-item-content>
-        <v-text-overflow :text="new Date(item.start).getFullYear()" />
-      </v-list-item-content>
-    </v-list-item>
-  </v-list>
+  <v-list-item
+    v-for="item in items"
+    clickable
+    :key="item.id"
+    :to="`/booking/${item.id}`"
+    :active="feature === item.id"
+  >
+    <v-list-item-icon><v-icon name="calendar_month" /></v-list-item-icon>
+    <v-list-item-content>
+      <v-text-overflow :text="new Date(item.start).getFullYear()" />
+    </v-list-item-content>
+  </v-list-item>
 </template>
 
 <script lang="ts">
@@ -21,9 +19,8 @@ import {ref} from 'vue';
 
 export default {
   props: {
-    eventId: {
+    feature: {
       type: String,
-      default: null,
     },
   },
   setup() {

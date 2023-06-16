@@ -3,11 +3,13 @@
     <iframe
       ref="iframe"
       class="iframe"
-      :src="'https://app.kulturspektakel.de/' + iframeSrc"
+      :src="`https://app.kulturspektakel.de/${navComponent}/${feature}`"
     ></iframe>
 
     <template #navigation>
-      <component :is="navComponent" />
+      <v-list nav>
+        <component v-if="navComponent" :is="navComponent" :feature="feature" />
+      </v-list>
     </template>
 
     <template #sidebar> </template>
@@ -17,7 +19,14 @@
 <script lang="ts">
 import booking from './booking.vue';
 import contactless from './contactless.vue';
-import {useRouter} from 'vue-router';
+import {RouteLocationNormalizedLoaded} from 'vue-router';
+
+function dataFromRoute(route: RouteLocationNormalizedLoaded) {
+  return {
+    feature: String(route.params.feature ?? ''),
+    navComponent: route.path.split('/')[1],
+  };
+}
 
 export default {
   mounted() {
@@ -30,17 +39,14 @@ export default {
     contactless,
   },
   watch: {
-    $route(to) {
-      console.log(to.path.split('/')[1]);
-      this.navComponent = to.path.split('/')[1];
+    $route() {
+      const {navComponent, feature} = dataFromRoute(this.$route);
+      this.navComponent = navComponent;
+      this.feature = feature;
     },
   },
   data() {
-    const router = useRouter();
-    return {
-      iframeSrc: 'booking/kult2023',
-      navComponent: router.currentRoute.value.path.split('/')[1],
-    };
+    return dataFromRoute(this.$route);
   },
 };
 </script>
