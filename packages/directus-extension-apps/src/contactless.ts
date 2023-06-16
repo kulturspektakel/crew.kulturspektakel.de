@@ -1,23 +1,20 @@
 import {defineModule} from '@directus/extensions-sdk';
-import ModuleComponent from './booking.vue';
+import ModuleComponent from './app.vue';
 
 export default defineModule({
-  id: 'booking',
-  name: 'Booking',
-  icon: 'star',
+  id: 'contactless',
+  name: 'Contactless',
+  icon: 'contactless',
   routes: [
     {
       path: '',
       component: ModuleComponent,
-      beforeEnter() {
-        return `/booking/kult2023`;
-      },
     },
     {
-      path: ':eventId',
+      path: ':feature',
       component: ModuleComponent,
       props: (route) => ({
-        eventId: route.params.eventId,
+        feature: route.params.feature,
       }),
     },
   ],

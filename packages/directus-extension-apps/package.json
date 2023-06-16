@@ -1,5 +1,5 @@
 {
-  "name": "directus-extension-react",
+  "name": "directus-extension-apps",
   "description": "Please enter a description for your extension",
   "icon": "extension",
   "version": "1.0.0",
@@ -11,31 +11,32 @@
   "directus:extension": {
     "type": "bundle",
     "path": {
-      "app": "../../extensions/directus-extension-react/booking.js",
-      "api": "../../extensions/directus-extension-react/endpoints.cjs"
+      "app": "../../extensions/directus-extension-apps/booking.js",
+      "api": "../../extensions/directus-extension-apps/endpoints.cjs"
     },
     "entries": [
-      {
-        "type": "endpoint",
-        "name": "react",
-        "source": "src/endpoints.ts"
-      },
       {
         "type": "module",
         "name": "booking",
         "source": "src/booking.ts"
+      },
+      {
+        "type": "module",
+        "name": "contactless",
+        "source": "src/contactless.ts"
       }
     ],
-    "host": "^9.22.4"
+    "host": "^10.0.0"
   },
   "scripts": {
-    "build": "directus-extension build && cp ./package.json ../../extensions/directus-extension-react/package.json",
+    "build": "directus-extension build && cp ./package.json ../../extensions/directus-extension-apps/package.json",
     "dev": "directus-extension build -w --no-minify"
   },
   "devDependencies": {
-    "@directus/extensions-sdk": "9.26.0",
+    "@directus/extensions-sdk": "10.1.3",
     "@types/express": "^4.17.17",
     "typescript": "^4.9.5",
-    "vue": "^3.2.47"
+    "vue": "^3.2.47",
+    "vue-router": "^4.2.2"
   }
 }

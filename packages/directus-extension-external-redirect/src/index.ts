@@ -7,7 +7,6 @@ export default defineModule({
   icon: 'box',
   hidden: true,
   preRegisterCheck(user) {
-    console.log(user);
     return user.role.admin_access === true;
   },
   routes: [
