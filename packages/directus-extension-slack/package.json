@@ -20,8 +20,8 @@
     "link": "directus-extension link"
   },
   "devDependencies": {
-    "@directus/extensions-sdk": "10.1.4",
-    "@types/node": "^18.16.0",
-    "typescript": "^5.0.4"
+    "@directus/extensions-sdk": "10.2.0",
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.2"
   }
 }
