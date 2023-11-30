@@ -23,6 +23,7 @@ jobs:
         with:
           service: 'crew'
           region: 'europe-west3'
+          image: 'gcr.io/cloudrun/hello'
 
       - name: 'Use output'
         run: 'curl "${{ steps.deploy.outputs.url }}"'
