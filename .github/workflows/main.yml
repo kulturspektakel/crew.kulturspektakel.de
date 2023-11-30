@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - master
+      - gcp
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -12,34 +12,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Install SSH key
-        uses: shimataro/ssh-key-action@v2
+      - uses: 'actions/checkout@v4'
+
+      - uses: 'google-github-actions/auth@v1'
         with:
-          key: ${{ secrets.SSH_KEY }}
-          known_hosts: ${{ secrets.KNOWN_HOSTS }}
-          if_key_exists: replace
-      - name: install
-        run: |
-          yarn
-      - name: env
-        env:
-          Dotenv: ${{ secrets.DOTENV_ME }}
-        run: |
-          echo "DOTENV_ME=$Dotenv" > .env.me
-          yarn dotenv-vault pull
-          yarn dotenv-vault pull production
-          yarn ts-node scripts/merge-envs.ts
-          rm -rf .env.me
-      - name: build
-        run: |
-          yarn build
-          rm -rf node_modules packages
-      - name: deploy
-        env:
-          Host: kultursp@kulturspektakel.de
-          Dir: /var/www/virtual/kultursp/cms.kulturspektakel.de
-        run: |
-          rm -rf node_modules
-          rsync -avz --delete . $Host:$Dir
-          ssh $Host "cd $Dir && ./scripts/deploy.sh"
+          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS_JSON }}'
+
+      - id: 'deploy'
+        uses: 'google-github-actions/deploy-cloudrun@v1'
+        with:
+          service: 'crew'
+          image: 'gcr.io/kultursp/crew'
+
+      - name: 'Use output'
+        run: 'curl "${{ steps.deploy.outputs.url }}"'
