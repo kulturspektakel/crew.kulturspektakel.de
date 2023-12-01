@@ -35,7 +35,7 @@ jobs:
           service: 'crew'
           region: 'europe-west3'
           source: ./
-          env_vars_file: ./env.yml
+          env_vars_file: ./env.json
 
       - name: 'Use output'
         run: 'curl "${{ steps.deploy.outputs.url }}"'
