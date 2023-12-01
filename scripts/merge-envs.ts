@@ -1,22 +1,24 @@
-import path from "path";
-import { promises as fs } from "fs";
-import { parse } from "dotenv";
+import path from 'path';
+import {promises as fs} from 'fs';
+import {parse} from 'dotenv';
 
-const ENV_PROD_PATH = path.join(__dirname, "..", ".env.production");
-const ENV_PATH = path.join(__dirname, "..", ".env");
+const ENV_PROD_PATH = path.join(__dirname, '..', '.env.production');
+const ENV_PATH = path.join(__dirname, '..', '.env');
 
 (async () => {
   const prod = await (
     await fs.readFile(ENV_PROD_PATH)
   )
     .toString()
-    .split("\n")
+    .split('\n')
     // filter empty vars
-    .filter((l) => !l.endsWith('=""'));
+    .filter((l) => !l.endsWith('=""'))
+    // filter comments
+    .filter((l) => !l.startsWith('#'));
 
   // adding new line
-  prod.unshift("");
-  await fs.appendFile(ENV_PATH, prod.join("\n"));
+  prod.unshift('');
+  await fs.appendFile(ENV_PATH, prod.join('\n'));
 
   const conf = await fs.readFile(ENV_PATH);
   process.env = {
@@ -24,5 +26,5 @@ const ENV_PATH = path.join(__dirname, "..", ".env");
     ...parse(conf),
   };
   await fs.unlink(ENV_PROD_PATH);
-  console.log("Merged configs into .env");
+  console.log('Merged configs into .env');
 })();
