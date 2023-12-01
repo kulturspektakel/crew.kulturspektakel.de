@@ -4,6 +4,7 @@ import {parse} from 'dotenv';
 
 const ENV_PROD_PATH = path.join(__dirname, '..', '.env.production');
 const ENV_PATH = path.join(__dirname, '..', '.env');
+const ENV_YML = path.join(__dirname, '..', 'env.yml');
 
 (async () => {
   const prod = await (
@@ -19,10 +20,16 @@ const ENV_PATH = path.join(__dirname, '..', '.env');
   await fs.appendFile(ENV_PATH, prod.join('\n'));
 
   const conf = await fs.readFile(ENV_PATH);
-  process.env = {
-    ...process.env,
-    ...parse(conf),
-  };
-  await fs.unlink(ENV_PROD_PATH);
+  const p = parse(conf);
+  console.log(p);
+
+  await fs.writeFile(
+    ENV_YML,
+    Object.entries(p)
+      .map(([k, v]) => `- name: ${k}\n  value: '${v}'`)
+      .join('\n'),
+  );
+
+  // await fs.unlink(ENV_PROD_PATH);
   console.log('Merged configs into .env');
 })();
