@@ -14,6 +14,17 @@ jobs:
     steps:
       - uses: 'actions/checkout@v4'
 
+      - name: Prepare environment
+        env:
+          Dotenv: ${{ secrets.DOTENV_ME }}
+        run: |
+          echo "DOTENV_ME=$Dotenv" > .env.me
+          yarn
+          yarn dotenv-vault pull
+          yarn dotenv-vault pull production
+          yarn ts-node scripts/merge-envs.ts
+          rm -rf .env.me
+
       - uses: 'google-github-actions/auth@v1'
         with:
           credentials_json: '${{ secrets.GOOGLE_CREDENTIALS_JSON }}'
