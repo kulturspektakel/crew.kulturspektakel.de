@@ -19,7 +19,8 @@ const ENV_PATH = path.join(__dirname, '..', '.env');
       .toString()
       .split('\n')
       .filter((l) => !l.endsWith('=""'))
-      .filter((l) => !l.startsWith('#')),
+      .filter((l) => !l.startsWith('#'))
+      .join('\n'),
   );
 
   process.env = {
