@@ -11,7 +11,7 @@ steps:
       [
         'build',
         '-t',
-        'kulturspektakel.de/gmail-reminder-api/cloud-run-source-deploy/crew:latest',
+        'europe-west1-docker.pkg.dev/gmail-reminder-api/cloud-run-source-deploy/crew:latest',
         '--cache-from',
         'europe-west1-docker.pkg.dev/gmail-reminder-api/cloud-run-source-deploy/crew:latest',
         '.',
