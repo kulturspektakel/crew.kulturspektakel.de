@@ -21,7 +21,7 @@ const ENV_YML = path.join(__dirname, '..', 'env.json');
 
   const conf = await fs.readFile(ENV_PATH);
   const p = parse(conf);
-  console.log(p);
+  delete p.PORT;
 
   await fs.writeFile(ENV_YML, JSON.stringify(p));
 
