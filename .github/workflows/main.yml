@@ -31,4 +31,5 @@ jobs:
 
       - name: 'deploy'
         run: |
-          gcloud run deploy crew --source ./ --env-vars-file ./env.json --region europe-west3 --allow-unauthenticated
+          gcloud builds submit --config cloudbuild.yaml .
+          gcloud run deploy crew --image kulturspektakel.de/crew:latest --env-vars-file ./env.json --region europe-west3 --allow-unauthenticated

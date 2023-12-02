@@ -1,0 +1,20 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args: [
+        '-c',
+        'docker pull
+        kulturspektakel.de/crew:latest || exit 0',
+      ]
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'build',
+        '-t',
+        'kulturspektakel.de/crew:latest',
+        '--cache-from',
+        'kulturspektakel.de/crew:latest',
+        '.',
+      ]
+images:
+  - 'kulturspektakel.de/crew:latest'
