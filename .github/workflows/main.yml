@@ -29,13 +29,6 @@ jobs:
         with:
           credentials_json: '${{ secrets.GOOGLE_CREDENTIALS_JSON }}'
 
-      - id: 'deploy'
-        uses: 'google-github-actions/deploy-cloudrun@v1'
-        with:
-          service: 'crew'
-          region: 'europe-west3'
-          source: ./
-          env_vars_file: ./env.json
-
-      - name: 'Use output'
-        run: 'curl "${{ steps.deploy.outputs.url }}"'
+      - name: 'deploy'
+        run: |
+          gcloud run deploy crew --source ./ --env-vars-file ./env.json --region europe-west3 --allow-unauthenticated
