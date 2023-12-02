@@ -32,4 +32,4 @@ jobs:
       - name: 'deploy'
         run: |
           gcloud builds submit --config cloudbuild.yaml .
-          gcloud run deploy crew --image kulturspektakel.de/crew:latest --env-vars-file ./env.json --region europe-west3 --allow-unauthenticated
+          gcloud run deploy crew --image europe-west3-docker.pkg.dev/gmail-reminder-api/cloud-run-source-deploy/crew:latest --env-vars-file ./env.json --region europe-west3 --allow-unauthenticated

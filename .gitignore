@@ -9,3 +9,4 @@ extensions/
 !.env.project
 .flaskenv*
 !.env.vault
+/env.json
