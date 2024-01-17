@@ -10,7 +10,7 @@ export default defineModule({
       path: '',
       component: ModuleComponent,
       beforeEnter() {
-        return `/booking/kult2023`;
+        return `/booking/kult2024`;
       },
     },
     {
