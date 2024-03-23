@@ -19,7 +19,7 @@ jobs:
           Dotenv: ${{ secrets.DOTENV_ME }}
         run: |
           echo "DOTENV_ME=$Dotenv" > .env.me
-          yarn
+          yarn --ignore-engines
           yarn dotenv-vault pull
           yarn dotenv-vault pull production
           yarn ts-node scripts/merge-envs.ts
