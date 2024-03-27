@@ -15,7 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "directus": "^10.10.4"
+    "directus": "10.9"
   },
   "devDependencies": {
     "@directus/extensions-sdk": "10.2.0",
