@@ -8,14 +8,14 @@
     "packages/*"
   ],
   "scripts": {
-    "start": "yarn directus start",
-    "build": "yarn workspaces run build"
+    "start": "directus start",
+    "build": "npm run build --workspaces"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "directus": "10.10.5"
+    "directus": "^10.10.5"
   },
   "devDependencies": {
     "@directus/extensions-sdk": "11.0.2",
