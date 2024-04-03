@@ -15,11 +15,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "directus": "10.9"
+    "directus": "10.10.5"
   },
   "devDependencies": {
-    "@directus/extensions-sdk": "10.2.0",
-    "@types/node": "^20.11.30",
+    "@directus/extensions-sdk": "11.0.2",
+    "@types/node": "^20.12.4",
     "dotenv-vault": "^1.26.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.3"

@@ -20,7 +20,7 @@
     "link": "directus-extension link"
   },
   "devDependencies": {
-    "@directus/extensions-sdk": "10.2.0",
+    "@directus/extensions-sdk": "11.0.2",
     "typescript": "^5.4.3",
     "vue": "^3.4.21"
   }
