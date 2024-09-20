@@ -1,3 +1,4 @@
 #!include:.gitignore
-!.env
-!node_modules/directus-extension-directus-operation-slugify
+
+# !.env
+# !node_modules/directus-extension-directus-operation-slugify
