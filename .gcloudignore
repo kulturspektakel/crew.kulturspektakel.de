@@ -1,0 +1,4 @@
+node_modules
+!node_modules/directus-extension-directus-operation-slugify
+.github
+.git
