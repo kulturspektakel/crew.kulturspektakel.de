@@ -23,6 +23,7 @@ jobs:
           npx dotenv-vault pull
           npx dotenv-vault pull production
           npx ts-node scripts/merge-envs.ts
+          npm run build
 
       - uses: 'google-github-actions/auth@v1'
         with:

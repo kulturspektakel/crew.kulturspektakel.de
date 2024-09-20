@@ -10,12 +10,12 @@
   ],
   "directus:extension": {
     "type": "hook",
-    "path": "../../extensions/directus-extension-slack/index.js",
+    "path": "dist/index.js",
     "source": "src/index.ts",
     "host": "^9.25.2"
   },
   "scripts": {
-    "build": "directus-extension build && cp ./package.json ../../extensions/directus-extension-slack/package.json",
+    "build": "directus-extension build",
     "dev": "directus-extension build -w --no-minify",
     "link": "directus-extension link"
   },

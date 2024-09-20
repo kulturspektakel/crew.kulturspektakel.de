@@ -11,8 +11,8 @@
   "directus:extension": {
     "type": "bundle",
     "path": {
-      "app": "../../extensions/directus-extension-apps/booking.js",
-      "api": "../../extensions/directus-extension-apps/endpoints.cjs"
+      "app": "dist/booking.js",
+      "api": "dist/endpoints.cjs"
     },
     "entries": [
       {
@@ -29,7 +29,7 @@
     "host": "^10.0.0"
   },
   "scripts": {
-    "build": "directus-extension build && cp ./package.json ../../extensions/directus-extension-apps/package.json",
+    "build": "directus-extension build",
     "dev": "directus-extension build -w --no-minify"
   },
   "devDependencies": {

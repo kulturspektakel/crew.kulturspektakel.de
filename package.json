@@ -15,7 +15,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "directus": "^10.10.5",
     "directus-extension-directus-operation-slugify": "^1.1.2"
   },
   "devDependencies": {
