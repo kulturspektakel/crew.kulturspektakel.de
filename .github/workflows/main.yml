@@ -13,11 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: 'actions/checkout@v4'
-      - uses: 'google-github-actions/auth@v2'
-        with:
-          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS_JSON }}'
 
-      - name: 'deploy'
+      - name: Prepare environment
         env:
           Dotenv: ${{ secrets.DOTENV_ME }}
         run: |
@@ -27,6 +24,15 @@ jobs:
           npx dotenv-vault pull production
           npx ts-node scripts/merge-envs.ts
           npm run build
+
+      - uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS_JSON }}'
+
+      - name: 'build'
+        run: |
           gcloud meta list-files-for-upload
           gcloud builds submit --config cloudbuild.yaml .
-          gcloud run deploy crew --image europe-west1-docker.pkg.dev/gmail-reminder-api/cloud-run-source-deploy/crew:latest --env-vars-file ./.env.json --region europe-west1 --allow-unauthenticated
+
+      - name: 'run'
+        run: gcloud run deploy crew --image europe-west1-docker.pkg.dev/gmail-reminder-api/cloud-run-source-deploy/crew:latest --env-vars-file ./.env.json --region europe-west1 --allow-unauthenticated

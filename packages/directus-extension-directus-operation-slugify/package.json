@@ -1,0 +1,55 @@
+{
+  "name": "directus-extension-directus-operation-slugify",
+  "description": "Generates a language aware slug from texts.",
+  "icon": "extension",
+  "version": "v1.1.2",
+  "keywords": [
+    "directus",
+    "directus-extension",
+    "directus-custom-operation",
+    "slugify"
+  ],
+  "type": "module",
+  "author": "Murat Gözel <murat@gozel.com.tr>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/muratgozel/directus-operation-slugify.git"
+  },
+  "bugs": {
+    "url": "https://github.com/muratgozel/directus-operation-slugify/issues"
+  },
+  "homepage": "https://github.com/muratgozel/directus-operation-slugify#readme",
+  "directus:extension": {
+    "type": "operation",
+    "path": {
+      "app": "dist/app.js",
+      "api": "dist/api.js"
+    },
+    "source": {
+      "app": "src/app.ts",
+      "api": "src/api.ts"
+    },
+    "host": "^10.3.0"
+  },
+  "scripts": {
+    "build": "directus-extension build",
+    "dev": "directus-extension build -w --no-minify",
+    "link": "directus-extension link"
+  },
+  "license": "MIT",
+  "funding": {
+    "type": "patreon",
+    "url": "https://patreon.com/muratgozel"
+  },
+  "devDependencies": {
+    "@directus/extensions-sdk": "10.3.0",
+    "@types/node": "^20.11.16",
+    "@types/speakingurl": "^13.0.6",
+    "node-releaser": "^2.1.4",
+    "typescript": "^5.3.3",
+    "vue": "^3.4.15"
+  },
+  "dependencies": {
+    "speakingurl": "^14.0.1"
+  }
+}
