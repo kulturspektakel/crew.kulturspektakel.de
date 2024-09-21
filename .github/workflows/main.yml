@@ -31,7 +31,6 @@ jobs:
 
       - name: 'build'
         run: |
-          gcloud meta list-files-for-upload
           gcloud builds submit --config cloudbuild.yaml .
 
       - name: 'run'
