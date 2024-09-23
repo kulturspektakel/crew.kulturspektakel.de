@@ -10,6 +10,7 @@ const ENV_YML = path.join(__dirname, '..', '.env.json');
   const dev = await readEnv(ENV_PATH);
   const prod = await readEnv(ENV_PROD_PATH);
   const config = {...dev, ...prod};
+  delete config.PORT;
   await fs.writeFile(ENV_YML, JSON.stringify(config));
   console.log('Merged configs into .env');
 })();
