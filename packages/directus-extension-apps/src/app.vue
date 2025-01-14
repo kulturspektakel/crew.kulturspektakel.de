@@ -52,6 +52,7 @@ export default {
 </script>
 
 <style>
+body {overflow: hidden;}
 .kultapp #sidebar,
 .kultapp #main-content .header-bar {
   display: none;
