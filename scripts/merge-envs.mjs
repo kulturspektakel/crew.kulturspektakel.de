@@ -2,9 +2,9 @@ import path from 'path';
 import {promises as fs} from 'fs';
 import {parse} from 'dotenv';
 
-const ENV_PROD_PATH = path.join(__dirname, '..', '.env.production');
-const ENV_PATH = path.join(__dirname, '..', '.env');
-const ENV_YML = path.join(__dirname, '..', '.env.json');
+const ENV_PROD_PATH = path.join(import.meta.dirname, '..', '.env.production');
+const ENV_PATH = path.join(import.meta.dirname, '..', '.env');
+const ENV_YML = path.join(import.meta.dirname, '..', '.env.json');
 
 (async () => {
   const dev = await readEnv(ENV_PATH);
@@ -15,10 +15,8 @@ const ENV_YML = path.join(__dirname, '..', '.env.json');
   console.log('Merged configs into .env');
 })();
 
-async function readEnv(path: string) {
-  const config = await (
-    await fs.readFile(path)
-  )
+async function readEnv(path) {
+  const config = (await fs.readFile(path))
     .toString()
     .split('\n')
     // filter empty vars
