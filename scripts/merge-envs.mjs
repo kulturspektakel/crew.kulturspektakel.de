@@ -1,6 +1,6 @@
 import path from 'path';
 import {promises as fs} from 'fs';
-import {parse} from 'dotenv';
+import {parse} from '@dotenvx/dotenvx';
 
 const ENV_PROD_PATH = path.join(import.meta.dirname, '..', '.env.production');
 const ENV_PATH = path.join(import.meta.dirname, '..', '.env');
