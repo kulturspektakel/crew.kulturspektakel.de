@@ -20,8 +20,8 @@ jobs:
         run: |
           echo "DOTENV_ME=$Dotenv" > .env.me
           npm install
-          npx dotenv-vault pull
-          npx dotenv-vault pull production
+          npx dotenvx decrypt -f .env.enc --k "${{ secrets.DOTENV_PRIVATE_KEY_ENC }}" --stdout > .env
+          npx dotenvx decrypt -f .env.production.enc --k "${{ secrets.DOTENV_PRIVATE_KEY_ENC }} --stdout > .env.production
           node scripts/merge-envs.mjs
           npm run build
 

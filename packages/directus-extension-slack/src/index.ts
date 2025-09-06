@@ -1,5 +1,6 @@
 import {defineHook} from '@directus/extensions-sdk';
 import {FilterHandler, User} from '@directus/types';
+import '@dotenvx/dotenvx/config'
 
 const filterHook: FilterHandler<User> = async (
   userPayload,

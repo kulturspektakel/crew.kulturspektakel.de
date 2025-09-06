@@ -23,5 +23,8 @@
     "@directus/extensions-sdk": "11.0.2",
     "@types/node": "^20.12.4",
     "typescript": "^5.4.3"
+  },
+  "dependencies": {
+    "@dotenvx/dotenvx": "^1.49.0"
   }
 }
