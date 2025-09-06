@@ -19,8 +19,8 @@ jobs:
           Dotenv: ${{ secrets.DOTENV_ME }}
         run: |
           npm install
-          npx dotenvx decrypt -f .env.enc --k "${{ secrets.DOTENV_PRIVATE_KEY_ENC }}" --stdout > .env
-          npx dotenvx decrypt -f .env.production.enc --k "${{ secrets.DOTENV_PRIVATE_KEY_ENC }} --stdout > .env.production
+          npx dotenvx decrypt -f .env.enc -k "${{ secrets.DOTENV_PRIVATE_KEY_ENC }}" --stdout > .env
+          npx dotenvx decrypt -f .env.production.enc -k "${{ secrets.DOTENV_PRIVATE_KEY_ENC }} --stdout > .env.production
           node scripts/merge-envs.mjs
           npm run build
 
