@@ -9,7 +9,9 @@
   ],
   "scripts": {
     "start": "directus start",
-    "build": "npm run build --workspaces"
+    "build": "npm run build --workspaces",
+    "env:decrypt": "npx dotenvx decrypt -f .env.enc --stdout > .env",
+    "env:encrypt": "npx dotenvx encrypt -f ./.env --stdout > .env.enc"
   },
   "keywords": [],
   "author": "",
