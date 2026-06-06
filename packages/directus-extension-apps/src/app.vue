@@ -1,10 +1,6 @@
 <template>
   <private-view class="kultapp" smallHeader="true" :title="'App'">
-    <iframe
-      ref="iframe"
-      class="iframe"
-      :src="`https://app.kulturspektakel.de/${navComponent}/${feature}`"
-    ></iframe>
+    <iframe ref="iframe" class="iframe" :src="iframeSrc"></iframe>
 
     <template #navigation>
       <v-list nav>
@@ -37,6 +33,17 @@ export default {
   components: {
     booking,
     contactless,
+  },
+  computed: {
+    iframeSrc() {
+      if (this.navComponent === 'contactless' && this.feature === 'lists') {
+        return 'https://www.kulturspektakel.de/crew/produkte';
+      }
+      if (this.navComponent === 'contactless' && this.feature === 'revenue') {
+        return 'https://app.hex.tech/2d68bee1-7fb2-431f-b6d6-fcda5e55d400/app/Buden-030NfVP7MEymudGImXoKpz/latest';
+      }
+      return `https://app.kulturspektakel.de/${this.navComponent}/${this.feature}`;
+    },
   },
   watch: {
     $route() {
