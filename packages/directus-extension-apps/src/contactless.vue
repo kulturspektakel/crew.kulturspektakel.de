@@ -3,7 +3,9 @@
     v-for="item in items"
     clickable
     :key="item.url"
-    :to="`/contactless/${item.url}`"
+    :to="item.href ? undefined : `/contactless/${item.url}`"
+    :href="item.href"
+    :target="item.href ? '_blank' : undefined"
     :active="feature === item.url"
   >
     <v-list-item-icon><v-icon :name="item.icon" /></v-list-item-icon>
@@ -23,9 +25,18 @@ export default {
   setup() {
     return {
       items: [
-        {icon: 'sell', label: 'Preislisten', url: 'lists'},
-        {icon: 'smartphone', label: 'Geräte', url: 'devices'},
-        {icon: 'monitoring', label: 'Umsätze', url: 'revenue'},
+        {
+          icon: 'sell',
+          label: 'Preislisten',
+          url: 'lists',
+          href: 'https://kulturspektakel.de/crew/produkte',
+        },
+        {
+          icon: 'monitoring',
+          label: 'Umsätze',
+          url: 'revenue',
+          href: 'https://app.hex.tech/2d68bee1-7fb2-431f-b6d6-fcda5e55d400/app/Buden-030NfVP7MEymudGImXoKpz/latest',
+        },
         {icon: 'code', label: 'Token', url: 'token'},
       ],
     };
