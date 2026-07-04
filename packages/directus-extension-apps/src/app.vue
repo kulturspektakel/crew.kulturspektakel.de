@@ -42,6 +42,9 @@ export default {
       if (this.navComponent === 'contactless' && this.feature === 'revenue') {
         return 'https://app.hex.tech/2d68bee1-7fb2-431f-b6d6-fcda5e55d400/app/Buden-030NfVP7MEymudGImXoKpz/latest';
       }
+      if (this.navComponent === 'booking') {
+        return `https://www.kulturspektakel.de/crew/booking/${this.feature}`;
+      }
       return `https://app.kulturspektakel.de/${this.navComponent}/${this.feature}`;
     },
   },
