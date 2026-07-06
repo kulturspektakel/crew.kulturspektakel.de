@@ -1,6 +1,6 @@
 <template>
   <private-view class="kultapp" smallHeader="true" :title="'App'">
-    <iframe ref="iframe" class="iframe" :src="iframeSrc"></iframe>
+    <iframe ref="iframe" class="iframe" :src="iframeSrc" allow="clipboard-write"></iframe>
 
     <template #navigation>
       <v-list nav>
